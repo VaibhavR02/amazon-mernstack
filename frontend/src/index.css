@@ -6,14 +6,186 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+* a {
+  text-decoration: none;
+  font-weight: 700;
+  color: rgb(48, 48, 214);
+}
+html {
+  scroll-behavior: smooth;
+}
+.site-conainer {
+  min-height: 100vh;
+}
 
-header {
-  background-color: #404040;
+main {
+  flex: 1;
+}
+
+.btn-primary,
+.btn-outline-primary {
+  background-color: #ffc040;
+  color: #000000;
+  border: none;
+  font-weight: 400;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.products > .product {
+  border: 1px solid #404040;
+  margin: 1rem;
+}
+
+.product img {
+  width: 100%;
+  max-width: 400px;
+}
+
+.productinfo {
   padding: 1rem;
 }
 
-header > a {
-  color: #ffffff;
+.rating span {
+  color: #ffc000;
+}
+
+.img-large {
+  max-width: 100%;
+}
+
+.img-thumbnail {
+  height: 80px;
+}
+
+.amazon-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.amazon-logo img {
+  width: 103px;
+  height: 31px;
+  margin-top: 15px;
+}
+
+.amazon-logo span {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.amazon-card {
+  width: 350px;
+  min-height: 340px;
+  padding: 20px 26px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin: 20px auto 24px auto;
+}
+
+.amazon-card h1 {
+  font-weight: 500;
+  font-size: 28px;
+}
+
+.amazon-card label {
+  font-size: 13px;
+  padding-left: 2px;
+  padding-bottom: 2px;
+  font-weight: 700;
+}
+
+.amazon-card input {
+  width: 283px;
+  margin: 3px auto;
+  padding: 10px 10px;
+  height: 35px;
+  background-color: #fff;
+  border: 1px solid #a6a6a6;
+  border-radius: 4px;
+  outline: none;
+}
+
+.amazon-card .amazon-button {
+  width: 283px;
+  margin-top: 20px;
+  font-weight: 500;
+  height: 35px;
+  background-color: #f0c14b;
+  border: 1px solid #a6a6a6;
+  border-top-color: #949494;
+  background-image: linear-gradient(#f7da90 #ffc000);
+  border-radius: 4px;
+}
+
+.amazon-card .amazon-button:hover {
+  color: #000000;
+}
+
+.amazon-card p,
+.amazon-card p a {
+  margin-top: 10px;
+
+  font-size: 15px;
+  width: 100%;
+  line-height: 1.5;
+}
+
+.break p {
+  font-weight: 700;
+}
+
+.small-container {
+  max-width: 600px;
+}
+
+.checkout-steps > div {
+  border-bottom: 0.2rem solid #a0a0a0;
+  color: #a0a0a0;
+}
+
+.checkout-steps > div.active {
+  border-bottom: 0.2rem solid #f08000;
+  color: #f08000;
+}
+
+/* sidebar */
+.navbar-brand {
   font-weight: bold;
-  text-decoration: none;
+}
+
+.side-navbar {
+  width: 240px;
+  height: 100%;
+  position: absolute;
+  left: -300px;
+  background-color: #100901;
+  transition: left 0.5s;
+}
+
+.site-container {
+  transition: left 0.5s;
+}
+.active-cont {
+  margin-left: 240px;
+}
+
+.active-cont {
+  left: 0;
+}
+
+.active-nav {
+  left: 0;
+}
+.text-bold {
+  font-weight: bold;
 }
