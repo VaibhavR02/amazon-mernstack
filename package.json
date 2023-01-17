@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "cd backend && npm install && cd ../frontend && npm install && npm run build",
-    "start": "node backend/server.js",
+    "start": "https://amazonbackend1.onrender.com/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
