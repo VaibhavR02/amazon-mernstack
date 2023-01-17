@@ -10,6 +10,7 @@ body {
   text-decoration: none;
   font-weight: 700;
   color: rgb(48, 48, 214);
+  box-sizing: border-box;
 }
 html {
   scroll-behavior: smooth;
