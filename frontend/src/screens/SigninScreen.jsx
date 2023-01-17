@@ -57,7 +57,7 @@ const SigninScreen = () => {
         <div className="amazon-card">
           <form onSubmit={submitHandler}>
             {' '}
-            <h1>SignIn</h1>
+            <h1>Sign in</h1>
             <div className="amazon-from">
               <label>Email </label>
               <br />

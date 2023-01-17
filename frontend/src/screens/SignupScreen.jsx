@@ -55,7 +55,7 @@ const SignupScreen = () => {
     <>
       <section>
         <Helmet>
-          <title>SignUp</title>
+          <title>Sign up</title>
         </Helmet>
         <div className="amazon-logo">
           <img src={logo} alt="" />
@@ -64,7 +64,7 @@ const SignupScreen = () => {
         <div className="amazon-card">
           <form onSubmit={submitHandler}>
             {' '}
-            <h1>SignUp</h1>
+            <h1>Sign up</h1>
             <div className="amazon-from">
               <label htmlFor="">Name</label>
               <br />
