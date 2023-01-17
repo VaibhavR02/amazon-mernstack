@@ -64,6 +64,18 @@ const data = {
       numReviews: 34,
       description: 'high quality pant ',
     },
+    {
+      name: 'Firebolt smart watch',
+      slug: 'firebolt-smart-watch',
+      category: 'watches',
+      image: '/images/watch1.jpg',
+      price: 1000,
+      countInStock: 25,
+      brand: 'Firebolt',
+      rating: 5,
+      numReviews: 34,
+      description: 'high quality watch ',
+    },
   ],
 };
 
