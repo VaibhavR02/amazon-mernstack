@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Rating from './Rating';
 import axios from 'axios';
 import { Store } from '../screens/Store';
+import toast from 'react-hot-toast';
 
 const Product = (props) => {
   const { product } = props;
@@ -26,6 +27,7 @@ const Product = (props) => {
       type: 'CART_ADD_ITEM',
       payload: { ...item, quantity },
     });
+    toast.success('added to cart');
   };
   return (
     <Card className="product">
