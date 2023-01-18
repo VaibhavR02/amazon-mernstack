@@ -15,20 +15,21 @@ const reducer = (state, action) => {
       return { ...state, loading: true };
 
     case 'FETCH_SUCCESS':
-      return { ...state, orders: action.payload, loading: false };
+      return { ...state, users: action.payload, loading: false };
 
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
 
     case 'DELETE_REQUEST':
       return { ...state, loadingDelete: true, successDelete: false };
-
     case 'DELETE_SUCCESS':
-      return { ...state, loadingDelete: false, successDelete: true };
-
+      return {
+        ...state,
+        loadingDelete: false,
+        successDelete: true,
+      };
     case 'DELETE_FAIL':
       return { ...state, loadingDelete: false };
-
     case 'DELETE_RESET':
       return { ...state, loadingDelete: false, successDelete: false };
 
@@ -37,21 +38,21 @@ const reducer = (state, action) => {
   }
 };
 
-export default function OrderListScreen() {
+export default function UserListScreen() {
   const navigate = useNavigate();
-  const { state } = useContext(Store);
-  const { userInfo } = state;
-  const [{ loading, error, orders, loadingDelete, successDelete }, dispatch] =
+  const [{ loading, error, users, loadingDelete, successDelete }, dispatch] =
     useReducer(reducer, {
       loading: true,
       error: '',
     });
+  const { state } = useContext(Store);
+  const { userInfo } = state;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get(`/api/orders`, {
+        const { data } = await axios.get(`/api/users`, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
@@ -67,32 +68,32 @@ export default function OrderListScreen() {
     } else {
       fetchData();
     }
-    // fetchData();
-  }, [successDelete, userInfo]);
+  }, [userInfo, successDelete, loadingDelete]);
 
-  const deleteHandler = async (order) => {
-    if (window.confirm('Are you sure to delete?')) {
-      try {
-        dispatch({ type: 'DELETE_REQUEST' });
-        await axios.delete(`/api/orders/${order._id}`, {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        });
-        toast.success('Order deleted successfully!');
-        dispatch({ type: 'DELETE_SUCCESS' });
-      } catch (err) {
-        toast.error(getError(error));
-        dispatch({
-          type: 'DELETE_FAIL',
-        });
-      }
+  const deleteHandler = async (user) => {
+    if (window.confirm('Are you sure to delete?'));
+    try {
+      dispatch({ type: 'DELETE_REQUEST' });
+      await axios.delete(`/api/users/${user._id}`, {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      });
+      toast.success('user deleted successfully');
+      dispatch({ type: 'DELETE_SUCCESS' });
+    } catch (err) {
+      toast.error(getError(error));
+      dispatch({
+        type: 'DELETE_FAIL',
+        payload: getError(err),
+      });
     }
   };
+
   return (
     <div>
       <Helmet>
-        <title>Orders</title>
+        <title>Users</title>
       </Helmet>
-      <h1>Orders</h1>
+      <h1>Users</h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {loading ? (
         <LoadingBox></LoadingBox>
@@ -103,42 +104,32 @@ export default function OrderListScreen() {
           <thead>
             <tr>
               <th>ID</th>
-              <th>USER</th>
-              <th>DATE</th>
-              <th>TOTAL</th>
-              <th>PAID</th>
-              <th>DELIVERED</th>
+              <th>NAME</th>
+              <th>EMAIL</th>
+              <th>IS ADMIN</th>
               <th>ACTIONS</th>
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
-              <tr key={order._id}>
-                <td>{order._id}</td>
-                <td>{order.user ? order.user.name : 'DELETED USER'}</td>
-                <td>{order.createdAt.substring(0, 10)}</td>
-                <td>{order.totalPrice.toFixed(2)}</td>
-                <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'NO'}</td>
-                <td>
-                  {order.isDelivered
-                    ? order.delieveredAt.substring(0, 10)
-                    : 'NO'}
-                </td>
+            {users.map((user) => (
+              <tr key={user._id}>
+                <td>{user._id}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.isAdmin ? 'YES' : 'NO'}</td>
                 <td>
                   <Button
                     type="button"
                     variant="light"
-                    onClick={() => {
-                      navigate(`/order/${order._id}`);
-                    }}
+                    onClick={() => navigate(`/admin/user/${user._id}`)}
                   >
-                    Details
+                    Edit
                   </Button>
                   &nbsp;
                   <Button
                     type="button"
                     variant="light"
-                    onClick={() => deleteHandler(order)}
+                    onClick={() => deleteHandler(user)}
                   >
                     Delete
                   </Button>

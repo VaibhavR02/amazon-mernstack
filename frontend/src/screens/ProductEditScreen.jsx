@@ -77,7 +77,7 @@ export default function ProductEditScreen() {
         setSlug(data.slug);
         setPrice(data.price);
         setImage(data.image);
-        // setImages(data.images);
+        setImages(data.images);
         setCategory(data.category);
         setCountInStock(data.countInStock);
         setBrand(data.brand);
@@ -105,7 +105,7 @@ export default function ProductEditScreen() {
           slug,
           price,
           image,
-          //   images,
+          images,
           category,
           brand,
           countInStock,
@@ -140,13 +140,12 @@ export default function ProductEditScreen() {
       });
       dispatch({ type: 'UPLOAD_SUCCESS' });
 
-      //   if (forImages) {
-      //     setImages([...images, data.secure_url]);
-      //   } else {
-      //     setImage(data.secure_url);
-      //   }
+      if (forImages) {
+        setImages([...images, data.secure_url]);
+      } else {
+        setImage(data.secure_url);
+      }
       toast.success('Image uploaded successfully. click Update to apply it');
-      setImage(data.secure_url);
     } catch (err) {
       toast.error(getError(err));
       dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
@@ -209,7 +208,7 @@ export default function ProductEditScreen() {
             {loadingUpload && <LoadingBox></LoadingBox>}
           </Form.Group>
 
-          {/* <Form.Group className="mb-3" controlId="additionalImage">
+          <Form.Group className="mb-3" controlId="additionalImage">
             <Form.Label>additional Images</Form.Label>
             {images.length === 0 && <MessageBox>No Image</MessageBox>}
             <ListGroup variant="flush"></ListGroup>
@@ -230,7 +229,8 @@ export default function ProductEditScreen() {
               onChange={(e) => uploadFileHandler(e, true)}
             />
             {loadingUpload && <LoadingBox></LoadingBox>}
-          </Form.Group> */}
+          </Form.Group>
+
           <Form.Group className="mb-3" controlId="category">
             <Form.Label>Category</Form.Label>
             <Form.Control
