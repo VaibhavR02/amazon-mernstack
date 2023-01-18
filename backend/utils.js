@@ -82,6 +82,11 @@ export const payOrderEmailTemplate = (order) => {
   <td align="right"> $${order.shippingPrice.toFixed(2)}</td>
   </tr>
   <tr>
+  <td colspan="2">Tax:</td>
+  <td align="right"> $${order.taxPrice.toFixed(2)}</td>
+  </tr>
+ 
+  <tr>
   <td colspan="2"><strong>Total Price:</strong></td>
   <td align="right"><strong> $${order.totalPrice.toFixed(2)}</strong></td>
   </tr>
