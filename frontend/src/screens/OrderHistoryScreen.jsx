@@ -1,12 +1,12 @@
-import axios from 'axios';
-import Button from 'react-bootstrap/Button';
 import React, { useContext, useEffect, useReducer } from 'react';
 import { Helmet } from 'react-helmet-async';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { Store } from './Store';
 import { getError } from '../util';
+import Button from 'react-bootstrap/esm/Button';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -30,14 +30,15 @@ export default function OrderHistoryScreen() {
     loading: true,
     error: '',
   });
-
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
-        const { data } = await axios.get(`/api/orders/mine`, {
-          headers: { authorization: `Bearer ${userInfo.token}` },
-        });
+        const { data } = await axios.get(
+          `/api/orders/mine`,
+
+          { headers: { Authorization: `Bearer ${userInfo.token}` } }
+        );
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (error) {
         dispatch({
@@ -46,7 +47,6 @@ export default function OrderHistoryScreen() {
         });
       }
     };
-
     fetchData();
   }, [userInfo]);
 
@@ -55,6 +55,7 @@ export default function OrderHistoryScreen() {
       <Helmet>
         <title>Order History</title>
       </Helmet>
+
       <h1>Order History</h1>
       {loading ? (
         <LoadingBox></LoadingBox>
@@ -68,7 +69,7 @@ export default function OrderHistoryScreen() {
               <th>DATE</th>
               <th>TOTAL</th>
               <th>PAID</th>
-              <th>DELIEVERED</th>
+              <th>DELIVERED</th>
               <th>ACTIONS</th>
             </tr>
           </thead>
@@ -81,7 +82,7 @@ export default function OrderHistoryScreen() {
                 <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
                 <td>
                   {order.isDelivered
-                    ? order.deliveredAt.substring(0, 10)
+                    ? order.delieveredAt.substring(0, 10)
                     : 'No'}
                 </td>
                 <td>
