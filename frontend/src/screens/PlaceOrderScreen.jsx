@@ -173,7 +173,7 @@ export default function PlaceOrderScreen() {
                       <strong>Order Total</strong>
                     </Col>
                     <Col>
-                      <strong>${cart.itemsPrice.toFixed(2)}</strong>
+                      <strong>${cart.totalPrice.toFixed(2)}</strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>
