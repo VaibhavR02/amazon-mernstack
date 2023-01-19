@@ -45,7 +45,7 @@ export default function CartScreen() {
       </Helmet>
       <h1>Shopping Cart</h1>
       <Row>
-        <Col md={8}>
+        <Col xs={11} md={8}>
           {cartItems.length === 0 ? (
             <MessageBox>
               Cart is Empty. <Link to="/">Go Shopping</Link>
