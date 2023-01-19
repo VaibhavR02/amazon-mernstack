@@ -68,23 +68,24 @@ export default function UserListScreen() {
     } else {
       fetchData();
     }
-  }, [userInfo, successDelete, loadingDelete]);
+  }, [userInfo, successDelete]);
 
   const deleteHandler = async (user) => {
-    if (window.confirm('Are you sure to delete?'));
-    try {
-      dispatch({ type: 'DELETE_REQUEST' });
-      await axios.delete(`/api/users/${user._id}`, {
-        headers: { Authorization: `Bearer ${userInfo.token}` },
-      });
-      toast.success('user deleted successfully');
-      dispatch({ type: 'DELETE_SUCCESS' });
-    } catch (err) {
-      toast.error(getError(error));
-      dispatch({
-        type: 'DELETE_FAIL',
-        payload: getError(err),
-      });
+    if (window.confirm('Are you sure to delete?')) {
+      try {
+        dispatch({ type: 'DELETE_REQUEST' });
+        await axios.delete(`/api/users/${user._id}`, {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        });
+        toast.success('user deleted successfully');
+        dispatch({ type: 'DELETE_SUCCESS' });
+      } catch (err) {
+        toast.error(getError(error));
+        dispatch({
+          type: 'DELETE_FAIL',
+          payload: getError(err),
+        });
+      }
     }
   };
 
