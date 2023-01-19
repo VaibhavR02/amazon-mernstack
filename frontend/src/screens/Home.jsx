@@ -1,7 +1,10 @@
 import React from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
-
+import banner1 from '../banner/amazon.jpg';
+import banner2 from '../banner/amazon2.jpg';
+import banner3 from '../banner/amazon3.jpg';
+import Carousel from 'react-bootstrap/Carousel';
 import { useReducer } from 'react';
 import logger from 'use-reducer-logger';
 import Row from 'react-bootstrap/Row';
@@ -57,6 +60,33 @@ const Home = () => {
       <Helmet>
         <title>amazon</title>
       </Helmet>
+      {/* ------------------------------------------- */}
+
+      <Carousel fade indicators={''} controls={''}>
+        <Carousel.Item>
+          <img
+            className="d-block w-100 rounded"
+            src={banner1}
+            alt="First slide"
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100 rounded"
+            src={banner2}
+            alt="First slide"
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100 rounded"
+            src={banner3}
+            alt="First slide"
+          />
+        </Carousel.Item>
+      </Carousel>
+
+      {/* ------------------------------------------- */}
       <h1>Featured products</h1>
       <div className="products">
         {loading ? (

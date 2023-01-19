@@ -77,6 +77,11 @@ main {
   box-shadow: 0, 0, 10px rgb(70, 69, 69);
 }
 
+.curousel {
+  height: 465px;
+  object-fit: cover;
+}
+
 .amazon-logo {
   display: flex;
   justify-content: center;
