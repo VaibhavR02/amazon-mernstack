@@ -12,6 +12,9 @@ body {
   color: rgb(48, 48, 214);
   box-sizing: border-box;
 }
+::-webkit-scrollbar {
+  display: none;
+}
 html {
   scroll-behavior: smooth;
 }
@@ -193,4 +196,9 @@ main {
 
 .button.thumbnail {
   padding: 0;
+}
+
+.orders {
+  /* display: flex; */
+  overflow-x: auto;
 }

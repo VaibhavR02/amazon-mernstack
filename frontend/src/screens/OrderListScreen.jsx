@@ -88,7 +88,7 @@ export default function OrderListScreen() {
     }
   };
   return (
-    <div>
+    <div className="orders">
       <Helmet>
         <title>Orders</title>
       </Helmet>
@@ -99,54 +99,56 @@ export default function OrderListScreen() {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <table className="table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>USER</th>
-              <th>DATE</th>
-              <th>TOTAL</th>
-              <th>PAID</th>
-              <th>DELIVERED</th>
-              <th>ACTIONS</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((order) => (
-              <tr key={order._id}>
-                <td>{order._id}</td>
-                <td>{order.user ? order.user.name : 'DELETED USER'}</td>
-                <td>{order.createdAt.substring(0, 10)}</td>
-                <td>{order.totalPrice.toFixed(2)}</td>
-                <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'NO'}</td>
-                <td>
-                  {order.isDelivered
-                    ? order.delieveredAt.substring(0, 10)
-                    : 'NO'}
-                </td>
-                <td>
-                  <Button
-                    type="button"
-                    variant="light"
-                    onClick={() => {
-                      navigate(`/order/${order._id}`);
-                    }}
-                  >
-                    Details
-                  </Button>
-                  &nbsp;
-                  <Button
-                    type="button"
-                    variant="light"
-                    onClick={() => deleteHandler(order)}
-                  >
-                    Delete
-                  </Button>
-                </td>
+        <div className="orders">
+          <table className="table ">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>USER</th>
+                <th>DATE</th>
+                <th>TOTAL</th>
+                <th>PAID</th>
+                <th>DELIVERED</th>
+                <th>ACTIONS</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {orders.map((order) => (
+                <tr key={order._id}>
+                  <td>{order._id}</td>
+                  <td>{order.user ? order.user.name : 'DELETED USER'}</td>
+                  <td>{order.createdAt.substring(0, 10)}</td>
+                  <td>{order.totalPrice.toFixed(2)}</td>
+                  <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'NO'}</td>
+                  <td>
+                    {order.isDelivered
+                      ? order.delieveredAt.substring(0, 10)
+                      : 'NO'}
+                  </td>
+                  <td>
+                    <Button
+                      type="button"
+                      variant="light"
+                      onClick={() => {
+                        navigate(`/order/${order._id}`);
+                      }}
+                    >
+                      Details
+                    </Button>
+                    &nbsp;
+                    <Button
+                      type="button"
+                      variant="light"
+                      onClick={() => deleteHandler(order)}
+                    >
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

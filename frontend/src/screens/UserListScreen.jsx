@@ -101,44 +101,46 @@ export default function UserListScreen() {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <table className="table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>NAME</th>
-              <th>EMAIL</th>
-              <th>IS ADMIN</th>
-              <th>ACTIONS</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user._id}>
-                <td>{user._id}</td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.isAdmin ? 'YES' : 'NO'}</td>
-                <td>
-                  <Button
-                    type="button"
-                    variant="light"
-                    onClick={() => navigate(`/admin/user/${user._id}`)}
-                  >
-                    Edit
-                  </Button>
-                  &nbsp;
-                  <Button
-                    type="button"
-                    variant="light"
-                    onClick={() => deleteHandler(user)}
-                  >
-                    Delete
-                  </Button>
-                </td>
+        <div className="orders">
+          <table className="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>EMAIL</th>
+                <th>IS ADMIN</th>
+                <th>ACTIONS</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user._id}>
+                  <td>{user._id}</td>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.isAdmin ? 'YES' : 'NO'}</td>
+                  <td>
+                    <Button
+                      type="button"
+                      variant="light"
+                      onClick={() => navigate(`/admin/user/${user._id}`)}
+                    >
+                      Edit
+                    </Button>
+                    &nbsp;
+                    <Button
+                      type="button"
+                      variant="light"
+                      onClick={() => deleteHandler(user)}
+                    >
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

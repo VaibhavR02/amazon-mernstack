@@ -153,8 +153,8 @@ export default function ProductListScreen() {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <>
-          <table className="table">
+        <div className="orders">
+          <table className="table ">
             <thead>
               <tr>
                 <th>ID</th>
@@ -205,7 +205,7 @@ export default function ProductListScreen() {
               </Link>
             ))}
           </div>
-        </>
+        </div>
       )}
     </div>
   );
