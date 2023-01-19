@@ -66,6 +66,10 @@ main {
   height: 80px;
 }
 
+.navbar {
+  padding: 2px 0;
+}
+
 .amazon-logo {
   display: flex;
   justify-content: center;

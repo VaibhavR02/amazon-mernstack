@@ -9,6 +9,7 @@ import Home from './screens/Home';
 import ProductScreen from './screens/ProductScreen';
 import { Link } from 'react-router-dom';
 import Badge from 'react-bootstrap/Badge';
+import logo from './screens/logo1.png';
 import { useContext, useEffect, useState } from 'react';
 import { Store } from './screens/Store';
 import CartScreen from './screens/CartScreen';
@@ -70,9 +71,10 @@ function App() {
         }
       >
         <header>
-          <Navbar bg="dark" variant="dark" expand="lg">
+          <Navbar bg="dark" variant="dark" expand="lg" className="navbar  ">
             <Container>
               <Button
+                className="me-2"
                 variant="dark"
                 onClick={() => setSidebarIsOpen(!siderbarIsOpen)}
               >
@@ -80,7 +82,12 @@ function App() {
                 <i className="fas fa-bars"></i>{' '}
               </Button>
               <LinkContainer to={'/'}>
-                <Navbar.Brand>amazon</Navbar.Brand>
+                <Navbar.Brand>
+                  <div className="amazon-logo">
+                    <img src={logo} alt="" />
+                    <span>.in</span>
+                  </div>
+                </Navbar.Brand>
               </LinkContainer>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">

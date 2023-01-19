@@ -14,7 +14,7 @@ const SerachBox = () => {
     navigate(query ? `/search/?query=${query}` : '/search');
   };
   return (
-    <Form className="d-flex m-auto " onSubmit={submitHandler}>
+    <Form className="d-flex  ms-2 w-100 " onSubmit={submitHandler}>
       <InputGroup>
         <FormControl
           type="text"
