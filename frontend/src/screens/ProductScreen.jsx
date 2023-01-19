@@ -76,6 +76,7 @@ function ProductScreen() {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
       }
     };
+
     fetchData();
   }, [slug]);
 
@@ -277,7 +278,11 @@ function ProductScreen() {
                 />
               </FloatingLabel>
               <div className="mb-3">
-                <Button disabled={loadingCreateReview} type="submit">
+                <Button
+                  className="btn-sm"
+                  disabled={loadingCreateReview}
+                  type="submit"
+                >
                   Submit
                 </Button>
                 {loadingCreateReview && <LoadingBox></LoadingBox>}
