@@ -194,7 +194,7 @@ export default function ProductListScreen() {
               ))}
             </tbody>
           </table>
-          <div>
+          <div className="orders">
             {[...Array(pages).keys()].map((x) => (
               <Link
                 className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}

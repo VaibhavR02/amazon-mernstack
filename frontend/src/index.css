@@ -31,7 +31,13 @@ main {
   background-color: #ffc040;
   color: #000000;
   border: none;
-  font-weight: 400;
+  font-weight: 500;
+}
+
+.btn-primary:hover,
+.btn-outline-primary:hover {
+  background-color: #faa700;
+  color: #000000;
 }
 
 .products {
@@ -68,6 +74,7 @@ main {
 
 .navbar {
   padding: 2px 0;
+  box-shadow: 0, 0, 10px rgb(70, 69, 69);
 }
 
 .amazon-logo {

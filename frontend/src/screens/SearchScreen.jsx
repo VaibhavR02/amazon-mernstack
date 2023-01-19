@@ -243,6 +243,7 @@ export default function SearchScreen() {
                 <Col className="text-end">
                   Sort by{' '}
                   <select
+                    className="my-2"
                     value={order}
                     onChange={(e) => {
                       navigate(getFilterUrl({ order: e.target.value }));

@@ -71,7 +71,7 @@ function App() {
         }
       >
         <header>
-          <Navbar bg="dark" variant="dark" expand="lg" className="navbar  ">
+          <Navbar bg="dark" variant="dark" expand="lg" className="navbar   ">
             <Container>
               <Button
                 className="me-2"
@@ -89,7 +89,10 @@ function App() {
                   </div>
                 </Navbar.Brand>
               </LinkContainer>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Toggle
+                aria-controls="basic-navbar-nav"
+                className="border-0"
+              />
               <Navbar.Collapse id="basic-navbar-nav">
                 <SerachBox />
                 <Nav className="me-auto w-100 justify-content-end">
@@ -173,7 +176,7 @@ function App() {
           </Nav>
         </div>
         <main>
-          <Container className="mt-3">
+          <Container className="mt-2">
             <Routes>
               {/* -------admin------- */}
 
@@ -233,11 +236,11 @@ function App() {
 
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/" element={<Home />} />
-
-              <Route path="/cart" element={<CartScreen />} />
-              <Route path="/search" element={<SearchScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
+              <Route path="/cart" element={<CartScreen />} />
+              <Route path="/search" element={<SearchScreen />} />
+
               <Route
                 path="/profile"
                 element={
@@ -269,7 +272,7 @@ function App() {
             </Routes>
           </Container>
         </main>
-        <footer className="text-center">
+        <footer className="text-center bg-dark text-white">
           All Rights Reserved &copy;2022 vaibhavrandale800@gmail.com
         </footer>
       </div>
