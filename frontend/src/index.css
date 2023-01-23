@@ -189,11 +189,11 @@ main {
   position: absolute;
   left: -300px;
   background-color: #100901;
-  transition: left 0.5s;
+  transition:  0.5s;
 }
 
 .site-container {
-  transition: left 0.5s;
+  transition:  0.4s;
 }
 .active-cont {
   margin-left: 240px;
