@@ -189,11 +189,11 @@ main {
   position: absolute;
   left: -300px;
   background-color: #100901;
-  transition:  0.5s;
+  transition: 0.5s;
 }
 
 .site-container {
-  transition:  0.4s;
+  transition: 0.4s;
 }
 .active-cont {
   margin-left: 240px;
@@ -217,4 +217,34 @@ main {
 .orders {
   /* display: flex; */
   overflow-x: auto;
+}
+
+.loader {
+  background-color: white;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  z-index: 100;
+}
+
+.loader > img {
+  width: 10rem;
+  animation: loadingAnimation 0.9s linear infinite alternate;
+}
+
+.loader > p {
+  font-weight: 700;
+}
+
+@keyframes loadingAnimation {
+  to {
+    transform: scale(1.1);
+    opacity: 0;
+  }
 }

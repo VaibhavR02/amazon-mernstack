@@ -35,6 +35,8 @@ import OrderListScreen from './screens/OrderListScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
 
+import Loader from './components/Loader';
+
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
@@ -47,9 +49,13 @@ function App() {
     window.location.href = '/signin';
   };
   const [siderbarIsOpen, setSidebarIsOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 6000);
     const fetchCategories = async () => {
       try {
         const { data } = await axios.get(`/api/products/categories`);
@@ -63,11 +69,12 @@ function App() {
 
   return (
     <BrowserRouter>
+      {loading && <Loader />}
       <div
         className={
           siderbarIsOpen
-            ? 'd-flex flex-column site-conainer active-cont'
-            : 'd-flex flex-column site-conainer'
+            ? 'd-flex flex-column site-container active-cont'
+            : 'd-flex flex-column site-container'
         }
       >
         <header>
@@ -158,7 +165,7 @@ function App() {
         >
           <Nav className="flex-column text-white w-100 p-2">
             <Nav.Item>
-              <strong>Categories</strong>
+              <strong>Categories </strong>
             </Nav.Item>
             {categories.map((category) => (
               <Nav.Item key={category}>
