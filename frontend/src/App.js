@@ -69,7 +69,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      {loading && <Loader />}
       <div
         className={
           siderbarIsOpen
@@ -183,6 +182,7 @@ function App() {
           </Nav>
         </div>
         <main>
+          {loading && <Loader />}
           <Container className="mt-2">
             <Routes>
               {/* -------admin------- */}
