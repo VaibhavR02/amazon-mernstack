@@ -84,7 +84,9 @@ main {
 
 .product img {
   width: 100%;
-  max-width: 400px;
+  max-width: 270px;
+  max-height: 270px;
+  margin: auto;
 }
 
 .productinfo {
@@ -96,7 +98,9 @@ main {
 }
 
 .img-large {
-  max-width: 100%;
+  max-width: 80%;
+
+  margin: auto;
 }
 
 .img-thumbnail {
