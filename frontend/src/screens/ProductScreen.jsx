@@ -22,7 +22,6 @@ import { getError } from '../util';
 import { Store } from './Store';
 import { toast } from 'react-hot-toast';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import ReactImageMagnify from 'react-image-magnify';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -131,6 +130,10 @@ function ProductScreen() {
     }
   };
 
+  // ----------------------------
+
+  //------------------------
+
   return loading ? (
     <LoadingBox />
   ) : error ? (
@@ -138,28 +141,11 @@ function ProductScreen() {
   ) : (
     <div>
       <Row>
-        <Col className="img-large  " md={6}>
-          {/* <img
+        <Col className="img-large" md={6}>
+          <img
             className="img-large"
             src={selectedImage || product.image}
             alt={product.name}
-          /> */}
-          <ReactImageMagnify
-            {...{
-              smallImage: {
-                alt: 'Wristwatch by Ted Baker London',
-                isFluidWidth: true,
-                src: selectedImage || product.image,
-
-                sizes:
-                  '(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px',
-              },
-              largeImage: {
-                src: selectedImage || product.image,
-                width: 1200,
-                height: 1800,
-              },
-            }}
           />
         </Col>
 
