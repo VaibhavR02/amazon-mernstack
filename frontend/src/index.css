@@ -12,9 +12,7 @@ body {
   color: rgb(48, 48, 214);
   box-sizing: border-box;
 }
-::-webkit-scrollbar {
-  display: none;
-}
+
 html {
   scroll-behavior: smooth;
 }
@@ -84,23 +82,17 @@ main {
 
 .product img {
   width: 100%;
-  max-width: 270px;
-  max-height: 270px;
-  margin: auto;
+  max-width: 400px;
 }
-
-.productinfo {
+.product-info {
   padding: 1rem;
+}
+.img-large {
+  max-width: 100%;
 }
 
 .rating span {
   color: #ffc000;
-}
-
-.img-large {
-  max-width: 80%;
-
-  margin: auto;
 }
 
 .img-thumbnail {

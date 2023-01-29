@@ -130,10 +130,6 @@ function ProductScreen() {
     }
   };
 
-  // ----------------------------
-
-  //------------------------
-
   return loading ? (
     <LoadingBox />
   ) : error ? (
