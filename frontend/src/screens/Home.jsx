@@ -4,6 +4,9 @@ import axios from 'axios';
 import banner1 from '../banner/amazon.jpg';
 import banner2 from '../banner/amazon2.jpg';
 import banner3 from '../banner/amazon3.jpg';
+import banner4 from '../banner/amazon4.jpg';
+import banner5 from '../banner/amazon5.jpg';
+import banner6 from '../banner/banner-6.jpg';
 import Carousel from 'react-bootstrap/Carousel';
 import { useReducer } from 'react';
 import logger from 'use-reducer-logger';
@@ -62,7 +65,7 @@ const Home = () => {
       </Helmet>
       {/* ------------------------------------------- */}
 
-      <Carousel fade indicators={''} controls={''}>
+      <Carousel fade indicators={''}>
         <Carousel.Item>
           <img
             className="d-block w-100 rounded"
@@ -84,6 +87,27 @@ const Home = () => {
             alt="First slide"
           />
         </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100 rounded"
+            src={banner6}
+            alt="First slide"
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100 rounded"
+            src={banner4}
+            alt="First slide"
+          />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100 rounded"
+            src={banner5}
+            alt="First slide"
+          />
+        </Carousel.Item>
       </Carousel>
 
       {/* ------------------------------------------- */}
@@ -96,7 +120,7 @@ const Home = () => {
         ) : (
           <Row>
             {products.map((product) => (
-              <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
+              <Col key={product.slug} sm={6} md={4} lg={2} className="mb-3">
                 <Product product={product} />
               </Col>
             ))}
