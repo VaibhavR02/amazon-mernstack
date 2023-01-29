@@ -127,6 +127,7 @@ export default function OrderListScreen() {
                   </td>
                   <td>
                     <Button
+                      className=" m-1 btn-sm"
                       type="button"
                       variant="light"
                       onClick={() => {
@@ -137,6 +138,7 @@ export default function OrderListScreen() {
                     </Button>
                     &nbsp;
                     <Button
+                      className="btn-sm"
                       type="button"
                       variant="light"
                       onClick={() => deleteHandler(order)}

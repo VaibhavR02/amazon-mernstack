@@ -121,6 +121,7 @@ export default function UserListScreen() {
                   <td>{user.isAdmin ? 'YES' : 'NO'}</td>
                   <td>
                     <Button
+                      className="m-1 btn-sm"
                       type="button"
                       variant="light"
                       onClick={() => navigate(`/admin/user/${user._id}`)}
@@ -129,7 +130,8 @@ export default function UserListScreen() {
                     </Button>
                     &nbsp;
                     <Button
-                      type="button"
+                      className="btn-sm"
+                      type="button "
                       variant="light"
                       onClick={() => deleteHandler(user)}
                     >

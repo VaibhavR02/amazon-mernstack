@@ -175,6 +175,7 @@ export default function ProductListScreen() {
                   <td>{product.brand}</td>
                   <td>
                     <Button
+                      className=" m-1 btn-sm"
                       type="button"
                       variant="light"
                       onClick={() => navigate(`/admin/product/${product._id}`)}
@@ -183,6 +184,7 @@ export default function ProductListScreen() {
                     </Button>
                     &nbsp;
                     <Button
+                      className="btn-sm"
                       type="button"
                       variant="light"
                       onClick={() => deleteHandler(product)}

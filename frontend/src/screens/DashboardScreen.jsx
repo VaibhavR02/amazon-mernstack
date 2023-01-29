@@ -60,7 +60,7 @@ export default function DashboardScreen() {
       ) : (
         <>
           <Row>
-            <Col md={4}>
+            <Col md={4} className="my-2">
               <Card>
                 <Card.Body>
                   <Card.Title>
@@ -72,7 +72,7 @@ export default function DashboardScreen() {
                 </Card.Body>
               </Card>
             </Col>
-            <Col md={4}>
+            <Col md={4} className="my-2">
               <Card>
                 <Card.Body>
                   <Card.Title>
@@ -84,7 +84,7 @@ export default function DashboardScreen() {
                 </Card.Body>
               </Card>
             </Col>
-            <Col md={4}>
+            <Col md={4} className="my-2">
               <Card>
                 <Card.Body>
                   <Card.Title>
@@ -93,7 +93,7 @@ export default function DashboardScreen() {
                       ? summary.orders[0].totalSales.toFixed(2)
                       : 0}
                   </Card.Title>
-                  <Card.Text> Orders</Card.Text>
+                  <Card.Text> Total Sale</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
