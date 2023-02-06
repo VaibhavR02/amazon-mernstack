@@ -226,13 +226,13 @@ main {
   font-weight: bold;
 }
 .closeBtn {
-  position: relative;
+  margin-left: 30px;
 }
 
 .side-navbar {
   opacity: 1;
   z-index: 2000;
-  width: 155px;
+  width: 170px;
   height: 100%;
   position: absolute;
   left: -300px;
