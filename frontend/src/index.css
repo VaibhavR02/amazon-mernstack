@@ -20,6 +20,7 @@ html {
 
 .images {
   max-height: 350px;
+  object-fit: fill;
 }
 
 .loader {
@@ -96,6 +97,8 @@ main {
 .product img {
   width: 100%;
   max-width: 400px;
+  max-height: 240px;
+  object-fit: contain;
 }
 .product-info {
   padding: 1rem;
