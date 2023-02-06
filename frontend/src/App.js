@@ -165,6 +165,12 @@ function App() {
           <Nav className="flex-column text-white w-100 p-2">
             <Nav.Item>
               <strong>Categories </strong>
+              <button
+                onClick={() => setSidebarIsOpen(false)}
+                className="btn text-white closeBtn "
+              >
+                <i className="fas fa-times"></i>
+              </button>
             </Nav.Item>
             {categories.map((category) => (
               <Nav.Item key={category}>
@@ -183,7 +189,7 @@ function App() {
         </div>
         <main>
           {loading && <Loader />}
-          <Container className="mt-2">
+          <div>
             <Routes>
               {/* -------admin------- */}
 
@@ -277,7 +283,7 @@ function App() {
                 }
               />
             </Routes>
-          </Container>
+          </div>
         </main>
         <footer className="text-center bg-dark text-white">
           All Rights Reserved &copy;2022 vaibhavrandale800@gmail.com

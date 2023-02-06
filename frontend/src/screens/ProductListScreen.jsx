@@ -133,7 +133,7 @@ export default function ProductListScreen() {
   };
 
   return (
-    <div>
+    <div className="m-2">
       <Row>
         <Col>
           <h1>Products</h1>

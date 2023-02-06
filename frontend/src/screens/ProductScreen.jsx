@@ -135,7 +135,7 @@ function ProductScreen() {
   ) : error ? (
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
-    <div>
+    <div className="m-auto container">
       <Row>
         <Col className="img-large" md={6}>
           <img
@@ -189,7 +189,7 @@ function ProductScreen() {
             </ListGroup.Item>
           </ListGroup>
         </Col>
-        <Col md={3}>
+        <Col md={3} className="mt-2">
           <Card>
             <Card.Body>
               <ListGroup variant="flush">

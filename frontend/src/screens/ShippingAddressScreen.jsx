@@ -54,7 +54,7 @@ const ShippingAddressScreen = () => {
     navigate('/payment');
   };
   return (
-    <div>
+    <div className="m-2">
       <Helmet>
         <title>Shipping Address</title>
       </Helmet>

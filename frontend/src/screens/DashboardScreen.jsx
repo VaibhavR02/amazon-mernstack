@@ -51,7 +51,7 @@ export default function DashboardScreen() {
   }, [userInfo]);
 
   return (
-    <div>
+    <div className="m-2">
       <h1>Dashboard</h1>
       {loading ? (
         <LoadingBox />

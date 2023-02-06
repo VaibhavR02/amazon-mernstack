@@ -59,75 +59,78 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <Helmet>
-        <title>amazon</title>
-      </Helmet>
-      {/* ------------------------------------------- */}
+    <>
+      <div className="">
+        <Helmet>
+          <title>amazon</title>
+        </Helmet>
+        {/* ------------------------------------------- */}
 
-      <Carousel fade indicators={''}>
-        <Carousel.Item>
-          <img
-            className="d-block w-100 rounded"
-            src={banner1}
-            alt="First slide"
-          />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100 rounded"
-            src={banner2}
-            alt="First slide"
-          />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100 rounded"
-            src={banner3}
-            alt="First slide"
-          />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100 rounded"
-            src={banner6}
-            alt="First slide"
-          />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100 rounded"
-            src={banner4}
-            alt="First slide"
-          />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100 rounded"
-            src={banner5}
-            alt="First slide"
-          />
-        </Carousel.Item>
-      </Carousel>
-
-      {/* ------------------------------------------- */}
-      <h1>Featured products</h1>
-      <div className="products">
-        {loading ? (
-          <LoadingBox />
-        ) : error ? (
-          <MessageBox variant="danger">{error}</MessageBox>
-        ) : (
-          <Row>
-            {products.map((product) => (
-              <Col key={product.slug} sm={6} md={4} lg={2} className="mb-3">
-                <Product product={product} />
-              </Col>
-            ))}
-          </Row>
-        )}
+        <Carousel fade indicators={''}>
+          <Carousel.Item>
+            <img
+              className="d-block w-100 images "
+              src={banner1}
+              alt="First slide"
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100 images "
+              src={banner2}
+              alt="First slide"
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100 images "
+              src={banner3}
+              alt="First slide"
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100  images"
+              src={banner6}
+              alt="First slide"
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100 images "
+              src={banner4}
+              alt="First slide"
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100 images "
+              src={banner5}
+              alt="First slide"
+            />
+          </Carousel.Item>
+        </Carousel>
       </div>
-    </div>
+
+      <div className="mx-5">
+        <h1>Featured products</h1>
+        <div className="products">
+          {loading ? (
+            <LoadingBox />
+          ) : error ? (
+            <MessageBox variant="danger">{error}</MessageBox>
+          ) : (
+            <Row>
+              {products.map((product) => (
+                <Col key={product.slug} sm={4} md={3} lg={2} className="mb-3">
+                  <Product product={product} />
+                </Col>
+              ))}
+            </Row>
+          )}
+        </div>
+      </div>
+    </>
   );
 };
 
