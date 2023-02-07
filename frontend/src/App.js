@@ -78,7 +78,13 @@ function App() {
         }
       >
         <header>
-          <Navbar bg="dark" variant="dark" expand="lg" className="navbar   ">
+          <Navbar
+            bg="dark"
+            variant="dark"
+            expand="lg"
+            className="navbar"
+            style={{ opacity: '1', zIndex: '2500' }}
+          >
             <Container>
               <Button
                 className="me-2"

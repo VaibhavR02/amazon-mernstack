@@ -129,10 +129,6 @@ export default function SearchScreen() {
     const filterRating = filter.rating || rating;
     const filterPrice = filter.price || price;
     const sortOrder = filter.order || order;
-    //     return `${
-    //       skipPathname ? '' : '/search?'
-    //     }category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
-    //   };
     return `/search?category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
   };
   return (
