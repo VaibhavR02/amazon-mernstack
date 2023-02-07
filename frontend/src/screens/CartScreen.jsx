@@ -99,7 +99,7 @@ export default function CartScreen() {
             </ListGroup>
           )}
         </Col>
-        <Col md={4}>
+        <Col md={4} className="my-1">
           <Card>
             <Card.Body>
               <ListGroup variant="flush">

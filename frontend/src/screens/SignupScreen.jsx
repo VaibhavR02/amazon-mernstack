@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { Store } from './Store';
 import { toast } from 'react-hot-toast';
 import { getError } from '../util';
-import logo from './logo.png';
+
 const SignupScreen = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
@@ -57,10 +57,7 @@ const SignupScreen = () => {
         <Helmet>
           <title>Sign up</title>
         </Helmet>
-        <div className="amazon-logo">
-          <img src={logo} alt="" />
-          <span>.in</span>
-        </div>
+
         <div className="amazon-card">
           <form onSubmit={submitHandler}>
             {' '}
@@ -109,7 +106,14 @@ const SignupScreen = () => {
           <div className="break">
             <p>Already have an account?</p>
           </div>
-          <Link to={`/signin?redirect=${redirect}`}>Sign In</Link>
+          <Link to={`/signin?redirect=${redirect}`}>
+            <div>
+              <button type="button" className=" btn btn-sm btn-light">
+                {' '}
+                Sign in
+              </button>
+            </div>
+          </Link>
         </div>
       </section>
     </>

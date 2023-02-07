@@ -10,8 +10,14 @@ body {
 * a {
   text-decoration: none;
   font-weight: 700;
-  color: rgb(48, 48, 214);
+  color: rgb(80, 80, 246);
   box-sizing: border-box;
+  overflow-x: hidden;
+  font-weight: bold;
+}
+
+* a:hover {
+  color: rgb(61, 61, 250);
 }
 
 html {
@@ -21,6 +27,52 @@ html {
 .images {
   max-height: 350px;
   object-fit: fill;
+}
+
+.brand {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.brand > img {
+  height: auto;
+  width: 250px;
+  overflow-x: hidden;
+  object-fit: contain;
+  margin: 5px auto;
+  gap: 10px;
+  padding: 10px;
+  transition: all 0.5s;
+  border-radius: 15px;
+  border: 1px solid rgb(200, 195, 195);
+}
+
+.brand > img:hover {
+  box-shadow: 0px 6px 15px rgba(54, 54, 54, 0.63);
+  border: 1px solid rgb(91, 90, 90);
+}
+
+@media screen and (max-width: 675px) {
+  .brand {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, minmax(0, 2fr));
+  }
+  .brand > img {
+    width: 150px;
+    height: 100px;
+  }
+}
+
+@media screen and (min-width: 375px) {
+  .brand {
+    gap: 10px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .brand > img {
+    width: 150px;
+    height: 100px;
+  }
 }
 
 .loader {
@@ -226,7 +278,7 @@ main {
   font-weight: bold;
 }
 .closeBtn {
-  margin-left: 30px;
+  margin-left: 12px;
 }
 
 .side-navbar {
@@ -236,7 +288,7 @@ main {
   height: 100%;
   position: absolute;
   left: -300px;
-  background-color: #100901;
+  background-color: #1d1c1c;
   transition: 0.5s;
 }
 

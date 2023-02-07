@@ -1,12 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
-import banner1 from '../banner/amazon.jpg';
-import banner2 from '../banner/amazon2.jpg';
-import banner3 from '../banner/amazon3.jpg';
-import banner4 from '../banner/amazon4.jpg';
-import banner5 from '../banner/amazon5.jpg';
-import banner6 from '../banner/banner-6.jpg';
 import Carousel from 'react-bootstrap/Carousel';
 import { useReducer } from 'react';
 import logger from 'use-reducer-logger';
@@ -16,8 +10,9 @@ import Product from '../components/Product';
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import bannerimgs from '../banner/BannerAPI';
+import brandImgs from '../banner/BrandAPI';
 
-// import data from '../data';
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
@@ -60,60 +55,33 @@ const Home = () => {
 
   return (
     <>
-      <div className="">
+      <div className="m-2">
         <Helmet>
-          <title>amazon</title>
+          <title>Amazon</title>
         </Helmet>
         {/* ------------------------------------------- */}
 
         <Carousel fade indicators={''}>
-          <Carousel.Item>
-            <img
-              className="d-block w-100 images "
-              src={banner1}
-              alt="First slide"
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100 images "
-              src={banner2}
-              alt="First slide"
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100 images "
-              src={banner3}
-              alt="First slide"
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100  images"
-              src={banner6}
-              alt="First slide"
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100 images "
-              src={banner4}
-              alt="First slide"
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100 images "
-              src={banner5}
-              alt="First slide"
-            />
-          </Carousel.Item>
+          {bannerimgs.map((item, index) => (
+            <Carousel.Item key={index}>
+              <img
+                className="d-block w-100 rounded images "
+                src={item.imgSrc}
+                alt="First slide"
+              />
+            </Carousel.Item>
+          ))}
         </Carousel>
+
+        <div className="brand mx-3 my-2 ">
+          {brandImgs.map((item, index) => (
+            <img key={index} src={item.imgSrc} alt="banner1" />
+          ))}
+        </div>
       </div>
 
-      <div className="mx-5">
-        <h1>Featured products</h1>
+      <div className="mx-5 ">
+        <h1>Featured Products</h1>
         <div className="products">
           {loading ? (
             <LoadingBox />

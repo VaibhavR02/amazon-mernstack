@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, redirect, Route, Routes } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import { toast, Toaster } from 'react-hot-toast';
 import Nav from 'react-bootstrap/Nav';
@@ -36,6 +36,7 @@ import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
 
 import Loader from './components/Loader';
+import Footer from './components/Footer';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -55,7 +56,7 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 6000);
+    }, 1000);
     const fetchCategories = async () => {
       try {
         const { data } = await axios.get(`/api/products/categories`);
@@ -162,15 +163,31 @@ function App() {
               : 'side-navbar d-flex justify-content-between flex-wrap flex-column'
           }
         >
-          <Nav className="flex-column text-white w-100 p-2">
-            <Nav.Item>
-              <strong>Categories </strong>
+          <Nav className="flex-column   text-white my-2 w-100 ">
+            <p className=" text-white ms-3 ">
+              {' '}
+              Hello{' '}
+              <b>
+                {' '}
+                {userInfo ? (
+                  userInfo.name
+                ) : (
+                  <Link className="ms-2" to={`/signin?redirect=${redirect}`}>
+                    {' '}
+                    User{' '}
+                  </Link>
+                )}
+              </b>{' '}
               <button
                 onClick={() => setSidebarIsOpen(false)}
-                className="btn text-white closeBtn "
+                className="btn closeBtn text-white "
               >
-                <i className="fas fa-times"></i>
+                <i className="fas fa-times "></i>
               </button>
+            </p>
+
+            <Nav.Item>
+              <strong>Categories </strong>
             </Nav.Item>
             {categories.map((category) => (
               <Nav.Item key={category}>
@@ -285,9 +302,7 @@ function App() {
             </Routes>
           </div>
         </main>
-        <footer className="text-center bg-dark text-white">
-          All Rights Reserved &copy;2022 vaibhavrandale800@gmail.com
-        </footer>
+        <Footer />
       </div>
       <Toaster />
     </BrowserRouter>

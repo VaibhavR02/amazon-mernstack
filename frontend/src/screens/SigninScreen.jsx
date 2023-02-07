@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { Helmet } from 'react-helmet-async';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import logo from './logo.png';
+// import logo from './logo.png';
 import { Store } from './Store';
 import { toast } from 'react-hot-toast';
 import { getError } from '../util';
@@ -50,10 +50,10 @@ const SigninScreen = () => {
         <Helmet>
           <title>SignIn</title>
         </Helmet>
-        <div className="amazon-logo">
+        {/* <div className="amazon-logo">
           <img src={logo} alt="" />
           <span>.in</span>
-        </div>
+        </div> */}
         <div className="amazon-card">
           <form onSubmit={submitHandler}>
             {' '}
@@ -87,7 +87,15 @@ const SigninScreen = () => {
           <div className="break">
             <p>New to Amazon?</p>
           </div>
-          <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
+          <Link to={`/signup?redirect=${redirect}`}>
+            {' '}
+            <div>
+              <button type="button" className="newacc btn btn-sm btn-light">
+                {' '}
+                create new account
+              </button>
+            </div>
+          </Link>
         </div>
       </section>
     </>

@@ -219,6 +219,14 @@ productRouter.get(
   })
 );
 
+productRouter.get(
+  '/brands',
+  expressAsyncHandler(async (req, res) => {
+    const brands = await Product.find().distinct('brand');
+    res.send(brands);
+  })
+);
+
 productRouter.get('/slug/:slug', async (req, res) => {
   const product = await Product.findOne({ slug: req.params.slug });
   if (product) {
