@@ -120,6 +120,8 @@ function ProductScreen() {
       product.numReviews = data.numReviews;
       product.rating = data.rating;
       dispatch({ type: 'REFRESH_PRODUCT', payload: product });
+      setComment('');
+      setRating('');
       window.scrollTo({
         behavior: 'smooth',
         top: reviewRef.current.offsetTop,

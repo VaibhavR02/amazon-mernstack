@@ -165,16 +165,13 @@ function App() {
         >
           <Nav className="flex-column   text-white my-2 w-100 ">
             <p className=" text-white ms-3 ">
-              {' '}
-              Hello{' '}
+              Hello,&nbsp;
               <b>
-                {' '}
                 {userInfo ? (
                   userInfo.name
                 ) : (
                   <Link className="ms-2" to={`/signin?redirect=${redirect}`}>
-                    {' '}
-                    User{' '}
+                    User
                   </Link>
                 )}
               </b>{' '}

@@ -260,7 +260,7 @@ main {
 }
 
 .small-container {
-  max-width: 600px;
+  max-width: 700px;
 }
 
 .checkout-steps > div {
@@ -278,7 +278,7 @@ main {
   font-weight: bold;
 }
 .closeBtn {
-  margin-left: 12px;
+  margin-left: 9px;
 }
 
 .side-navbar {
