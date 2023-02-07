@@ -9,7 +9,7 @@ const Banner = (props) => {
   var settings = {
     dots: true,
     isFinite: true,
-    speed: 1500,
+    speed: 2500,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
@@ -32,6 +32,8 @@ const Banner = (props) => {
 };
 
 const CarouselImages = styled(Slider)`
+  overflow: hidden;
+
   opacity: 1;
   z-index: 1500;
   ul li button {
