@@ -79,7 +79,7 @@ const Home = () => {
           ))}
         </Contain>
       </div>
-      <hr className="mt-5" />
+      <hr className="my-4" style={{ opacity: '0' }} />
       <div className="mx-5  mt-3">
         <h1>Featured Products</h1>
         <div className="products">
@@ -120,9 +120,9 @@ const Contain = styled.div`
 
 const Wrap = styled.div`
   margin-top: 31px;
-  padding: 10px 0 16px;
+  padding: 20px 0 16px;
   position: relative;
-  padding-top: 46.25%;
+  padding-top: 40.25%;
   border-radius: 10px;
   cursor: default;
   overflow: hidden;
