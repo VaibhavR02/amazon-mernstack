@@ -63,10 +63,10 @@ const Home = () => {
 
         <Banner />
 
-        <Contain>
+        <Contain className="mx-2">
           {brandImgs.map((item, index) => (
-            <Wrap>
-              <img key={index} src={item.imgSrc} alt={`banner${index}`} />
+            <Wrap key={index}>
+              <img src={item.imgSrc} alt={`banner${index}`} />
               <video
                 autoPlay={true}
                 loop={true}
