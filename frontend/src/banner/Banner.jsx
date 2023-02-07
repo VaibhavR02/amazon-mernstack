@@ -57,10 +57,10 @@ const CarouselImages = styled(Slider)`
     }
   }
   .slick-prev {
-    left: -1%;
+    left: 0%;
   }
   .slick-next {
-    right: -1%;
+    right: 0%;
   }
   .slick-list {
     overflow: initial !important;
@@ -85,7 +85,7 @@ const Wrap = styled.div`
       border-radius: 4px;
       @media screen and (min-width: 375px) and (max-width: 550px) {
         width: 100%;
-        height: 25vh;
+        height: 20vh;
         object-fit: fill;
       }
       @media screen and (min-width: 280px) and (max-width: 375px) {
