@@ -90,7 +90,7 @@ export default function UserListScreen() {
   };
 
   return (
-    <div className="m-2">
+    <div className="container">
       <Helmet>
         <title>Users</title>
       </Helmet>

@@ -51,7 +51,7 @@ export default function OrderHistoryScreen() {
   }, [userInfo]);
 
   return (
-    <div className="m-2">
+    <div className="container">
       <Helmet>
         <title>Order History</title>
       </Helmet>

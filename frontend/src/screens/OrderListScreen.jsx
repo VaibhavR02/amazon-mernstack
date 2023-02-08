@@ -88,7 +88,7 @@ export default function OrderListScreen() {
     }
   };
   return (
-    <div className="orders m-2">
+    <div className="orders container">
       <Helmet>
         <title>Orders</title>
       </Helmet>

@@ -137,7 +137,7 @@ function ProductScreen() {
   ) : error ? (
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
-    <div className="m-auto container">
+    <div className="mt-2 container">
       <Row>
         <Col className="img-large" md={6}>
           <img
