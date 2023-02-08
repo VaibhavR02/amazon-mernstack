@@ -9,7 +9,7 @@ const Banner = (props) => {
   var settings = {
     dots: true,
     isFinite: true,
-    speed: 2500,
+    speed: 700,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
@@ -77,22 +77,23 @@ const Wrap = styled.div`
     display: block;
     opacity: 1;
     z-index: 2000;
-    box-shadow: rgb(0 0 0 /69%) 0px 16px 30px -10px,
-      rgb(0 0 0 /73%) 0px 16px 10px -10px;
+    box-shadow: rgb(0 0 0 /69%) 0px 16px 10px -10px,
+      rgb(0 0 0 /73%) 0px 6px 10px -10px;
     cursor: default;
     img {
       width: 100%;
       height: 100%;
+
       object-fit: cover;
       border-radius: 4px;
       @media screen and (min-width: 375px) and (max-width: 550px) {
         width: 100%;
-        height: 20vh;
+        height: 23vh;
         object-fit: fill;
       }
       @media screen and (min-width: 280px) and (max-width: 375px) {
         width: 100%;
-        height: 19vh;
+        height: 20vh;
         object-fit: fill;
       }
     }
