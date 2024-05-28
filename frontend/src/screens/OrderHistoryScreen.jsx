@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { Store } from './Store';
@@ -30,6 +30,11 @@ export default function OrderHistoryScreen() {
     loading: true,
     error: '',
   });
+
+  const [searchTerm, setSearchterm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemPerPage = 10;
+
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
@@ -50,6 +55,21 @@ export default function OrderHistoryScreen() {
     fetchData();
   }, [userInfo]);
 
+  const filteredData = orders
+    ? orders.filter((item) => item._id.includes(searchTerm))
+    : [];
+
+  const indexOfLastItem = currentPage * itemPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemPerPage;
+  const currentOrders = filteredData
+    .slice()
+    .reverse()
+    .slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <div className="container">
       <Helmet>
@@ -62,47 +82,102 @@ export default function OrderHistoryScreen() {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <div className="orders">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>DATE</th>
-                <th>TOTAL</th>
-                <th>PAID</th>
-                <th>DELIVERED</th>
-                <th>ACTIONS</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map((order) => (
-                <tr key={order._id}>
-                  <td>{order._id}</td>
-                  <td>{order.createdAt.substring(0, 10)}</td>
-                  <td>{order.totalPrice.toFixed(2)}</td>
-                  <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
-                  <td>
-                    {order.isDelivered
-                      ? order.delieveredAt.substring(0, 10)
-                      : 'No'}
-                  </td>
-                  <td>
-                    <Button
-                      className="  btn-sm"
-                      type="button"
-                      variant="light"
-                      onClick={() => {
-                        navigate(`/order/${order._id}`);
-                      }}
-                    >
-                      Details
-                    </Button>
-                  </td>
+        <>
+          <div className="d-flex justify-content-end align-items-end ">
+            <input
+              type="text"
+              placeholder="search order..."
+              value={searchTerm}
+              onChange={(e) => setSearchterm(e.target.value)}
+              className="form-control my-2"
+              style={{ width: '300px' }}
+            />
+          </div>
+          <div className="orders">
+            <table className="table table-bordered">
+              <thead>
+                <tr>
+                  <th className="text-center">ID</th>
+                  <th className="text-center">DATE</th>
+                  <th className="text-center">TOTAL</th>
+                  <th className="text-center">PAID</th>
+                  <th className="text-center">DELIVERED</th>
+                  <th className="text-center">DETAILS</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {currentOrders.length === 0 ? (
+                  <tr>
+                    <td colSpan="7" className="text-center bg-warning fw-bold">
+                      No orders found
+                    </td>
+                  </tr>
+                ) : (
+                  currentOrders.map((order) => (
+                    <tr key={order._id}>
+                      <td className="text-center">
+                        <Link
+                          className=""
+                          type="button"
+                          variant="light"
+                          to={`/order/${order._id}`}
+                          target="_blank"
+                        >
+                          {order._id}
+                        </Link>
+                      </td>
+
+                      <td className="text-center">
+                        {order.createdAt.substring(0, 10)}
+                      </td>
+                      <td className="text-center">
+                        {order.totalPrice.toFixed(2)}
+                      </td>
+                      <td className="text-center">
+                        <span
+                          className={
+                            order.isPaid
+                              ? 'bg-success text-center badge '
+                              : 'bg-danger text-center badge '
+                          }
+                        >
+                          {order.isPaid ? order.paidAt.substring(0, 10) : 'NO'}
+                        </span>
+                      </td>
+                      <td className="text-center">
+                        <span
+                          className={
+                            order.isPaid && !order.isDelivered
+                              ? 'bg-warning text-center badge '
+                              : order.isPaid
+                              ? 'bg-success text-center badge '
+                              : 'bg-danger text-center badge '
+                          }
+                        >
+                          {order.isDelivered
+                            ? order.deliveredAt.substring(0, 10)
+                            : 'NO'}
+                        </span>
+                      </td>
+
+                      <td className="text-center">
+                        <Link
+                          className="btn btn-sm btn-light"
+                          type="button"
+                          variant="light"
+                          to={`/order/${order._id}`}
+                          target="_blank"
+                        >
+                          Details
+                        </Link>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </>
       )}
     </div>
   );

@@ -77,6 +77,7 @@ export default function OrderScreen() {
   });
 
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
+  const paymentMethod = localStorage.getItem('paymentMethod');
 
   function createOrder(data, actions) {
     return actions.order
@@ -131,6 +132,9 @@ export default function OrderScreen() {
     if (!userInfo) {
       return navigate('/login');
     }
+    // Retrieve payment method from localStorage
+    const paymentMethod = localStorage.getItem('paymentMethod');
+
     if (
       !order._id ||
       successPay ||
@@ -303,7 +307,7 @@ export default function OrderScreen() {
                     </Col>
                   </Row>
                 </ListGroup.Item>
-                {!order.isPaid && (
+                {/* {!order.isPaid && (
                   <ListGroup.Item>
                     {isPending ? (
                       <LoadingBox />
@@ -318,7 +322,39 @@ export default function OrderScreen() {
                     )}
                     {loadingPay && <LoadingBox></LoadingBox>}
                   </ListGroup.Item>
+                )} */}
+
+                {!order.isPaid && (
+                  <ListGroup.Item>
+                    {isPending ? (
+                      <LoadingBox />
+                    ) : (
+                      <div>
+                        {paymentMethod === 'PayPal' && (
+                          <PayPalButtons
+                            createOrder={createOrder}
+                            onApprove={onApprove}
+                            onError={onError}
+                          ></PayPalButtons>
+                        )}
+                        {paymentMethod === 'RazorPay' && (
+                          // Add Razorpay button here
+                          <Button
+                            id="razorpay-button"
+                            createOrder={createOrder}
+                            onApprove={onApprove}
+                            onError={onError}
+                          >
+                            Pay with Razorpay
+                          </Button>
+                          // You may need to define handleRazorpayPayment function to open the Razorpay modal
+                        )}
+                      </div>
+                    )}
+                    {loadingPay && <LoadingBox></LoadingBox>}
+                  </ListGroup.Item>
                 )}
+
                 {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                   <ListGroup.Item>
                     {loadingDeliver && <LoadingBox></LoadingBox>}

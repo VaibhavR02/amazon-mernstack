@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
@@ -72,6 +72,8 @@ export default function ProductListScreen() {
   const { state } = useContext(Store);
   const { userInfo } = state;
 
+  const [searchTerm, setSearchterm] = useState('');
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -132,6 +134,23 @@ export default function ProductListScreen() {
     }
   };
 
+  const filteredData = products
+    ? products.filter(
+        (item) =>
+          item._id.includes(searchTerm) ||
+          item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.brand.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : //  ||
+      //   products.filter((item) =>
+      //     item.category.toLowerCase().includes(searchTerm.toLowerCase())
+      //   ) ||
+      //   products.filter((item) =>
+      //     item.brand.toLowerCase().includes(searchTerm.toLowerCase())
+      //   )
+      [];
+
   return (
     <div className="container my-2">
       <Row>
@@ -153,61 +172,97 @@ export default function ProductListScreen() {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <div className="orders">
-          <table className="table ">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>PRICE</th>
-                <th>CATEGORY</th>
-                <th>BRAND</th>
-                <th>ACTIONS</th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => (
-                <tr key={product._id}>
-                  <td>{product._id}</td>
-                  <td>{product.name}</td>
-                  <td>{product.price}</td>
-                  <td>{product.category}</td>
-                  <td>{product.brand}</td>
-                  <td>
-                    <Button
-                      className=" m-1 btn-sm"
-                      type="button"
-                      variant="light"
-                      onClick={() => navigate(`/admin/product/${product._id}`)}
-                    >
-                      Edit
-                    </Button>
-                    &nbsp;
-                    <Button
-                      className="btn-sm"
-                      type="button"
-                      variant="light"
-                      onClick={() => deleteHandler(product)}
-                    >
-                      Delete
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="orders">
-            {[...Array(pages).keys()].map((x) => (
-              <Link
-                className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
-                key={x + 1}
-                to={`/admin/products?page=${x + 1}`}
-              >
-                {x + 1}
-              </Link>
-            ))}
+        <>
+          <div className="d-flex justify-content-end align-items-end ">
+            <input
+              type="text"
+              placeholder="search products..."
+              value={searchTerm}
+              onChange={(e) => setSearchterm(e.target.value)}
+              className="form-control my-2"
+              style={{ width: '300px' }}
+            />
           </div>
-        </div>
+          <div className="orders">
+            <table className="table table-bordered ">
+              <thead>
+                <tr>
+                  <th className="text-center">SR.</th>
+                  <th className="text-center">ID</th>
+                  <th className="text-center">NAME</th>
+                  <th className="text-center">PRICE</th>
+                  <th className="text-center">CATEGORY</th>
+                  <th className="text-center">BRAND</th>
+                  <th className="text-center">STOCK</th>
+                  <th className="text-center">ACTIONS</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredData.length === 0 ? (
+                  <tr>
+                    <td colSpan="7" className="text-center bg-warning fw-bold">
+                      No products found
+                    </td>
+                  </tr>
+                ) : (
+                  filteredData.map((product, index) => (
+                    <tr key={product._id} className="">
+                      <td className="text-center">{index + 1}</td>
+                      <td className="text-center">
+                        {' '}
+                        <Link to={`/product/${product.slug}`}>
+                          {product._id}
+                        </Link>
+                      </td>
+                      <td className="text-center">{product.name}</td>
+                      <td className="text-center">{product.price}</td>
+                      <td className="text-center">{product.category}</td>
+                      <td className="text-center">{product.brand}</td>
+                      <td className="text-center">
+                        {product.countInStock < 10 ? (
+                          <span className="badge bg-danger">
+                            {product.countInStock}
+                          </span>
+                        ) : (
+                          <span className="badge bg-success">
+                            {product.countInStock}
+                          </span>
+                        )}
+                      </td>
+                      <td className="text-center">
+                        <i
+                          className="fas fa-edit text-warning mx-1"
+                          type="button"
+                          variant="light"
+                          onClick={() =>
+                            navigate(`/admin/product/${product._id}`)
+                          }
+                        ></i>
+                        &nbsp;
+                        <i
+                          className="btn-sm fas fa-trash text-danger mx-1"
+                          variant="light"
+                          onClick={() => deleteHandler(product)}
+                        ></i>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+            <div className="orders d-flex justify-content-end">
+              {[...Array(pages).keys()].map((x) => (
+                <Link
+                  className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
+                  key={x + 1}
+                  to={`/admin/products?page=${x + 1}`}
+                >
+                  {x + 1}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </>
       )}
     </div>
   );

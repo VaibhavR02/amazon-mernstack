@@ -115,6 +115,7 @@ const data = {
       description: 'high quality pant ',
     },
   ],
+  orders: [],
 };
 
 export default data;
