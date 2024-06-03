@@ -92,11 +92,12 @@ main {
 
 .products > .product {
   border: 1px solid #404040;
-  margin: 1rem;
+  /* margin: 20px; */
 }
 
 .product {
   transition: all 0.5s;
+  width: 250px;
 }
 
 .product:hover {
@@ -105,8 +106,7 @@ main {
 
 .product img {
   width: 100%;
-  max-width: 400px;
-  max-height: 240px;
+  max-height: 150px;
   object-fit: contain;
 }
 .product-info {
@@ -118,6 +118,7 @@ main {
 
 .rating span {
   color: #ffc000;
+  font-size: 13px;
 }
 
 .img-thumbnail {

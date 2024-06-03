@@ -36,16 +36,22 @@ const Product = (props) => {
       </Link>
       <Card.Body>
         <Link to={`/product/${product.slug}`}>
-          <Card.Title>{product.name}</Card.Title>
+          <Card.Title style={{ fontSize: '15px' }}>{product.name}</Card.Title>
         </Link>
         <Rating rating={product.rating} numReviews={product.numReviews} />
-        <Card.Text>${product.price}</Card.Text>
+        <Card.Text style={{ fontSize: '14px', fontWeight: 'bold' }}>
+          ${product.price}
+        </Card.Text>
         {product.countInStock === 0 ? (
           <Button variant="light" disabled>
             Out of Stock
           </Button>
         ) : (
-          <Button className="btn-sm" onClick={() => addToCartHandler(product)}>
+          <Button
+            style={{ paddingX: '5px' }}
+            className="btn-sm"
+            onClick={() => addToCartHandler(product)}
+          >
             Add to Cart
           </Button>
         )}
