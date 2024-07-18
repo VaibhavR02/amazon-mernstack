@@ -185,18 +185,16 @@ export default function OrderListScreen() {
                       </td>
                       <td className="text-center">
                         <span
-                          className={
-                            order.isPaid && !order.isDelivered
-                              ? 'bg-warning text-center badge '
-                              : order.isPaid
-                              ? 'bg-success text-center badge '
-                              : 'bg-danger text-center badge '
-                          }
-                        >
-                          {order.isDelivered
-                            ? order.deliveredAt.substring(0, 10)
-                            : 'NO'}
-                        </span>
+  className={
+    order.isPaid
+      ? order.isDelivered
+        ? 'bg-success text-center badge'
+        : 'bg-warning text-center badge'
+      : 'bg-danger text-center badge'
+  }
+>
+  {order.isDelivered ? order.deliveredAt.substring(0, 10) : 'NO'}
+</span>
                       </td>
                       <td className="text-center">
                         <i
