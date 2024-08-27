@@ -183,7 +183,7 @@ export default function OrderListScreen() {
                           {order.isPaid ? order.paidAt.substring(0, 10) : 'NO'}
                         </span>
                       </td>
-                      <td className="text-center">
+{/*                       <td className="text-center">
                         <span
   className={
     order.isPaid
@@ -195,7 +195,22 @@ export default function OrderListScreen() {
 >
   {order.isDelivered ? order.deliveredAt.substring(0, 10) : 'NO'}
 </span>
-                      </td>
+                      </td> */}
+                     <td className="text-center">
+  <span
+    className={`badge text-center ${
+      order.isPaid
+        ? order.isDelivered
+          ? 'bg-success'
+          : 'bg-warning'
+        : 'bg-danger'
+    }`}
+  >
+    {order.isDelivered ? order.deliveredAt.substring(0, 10) : 'NO'}
+  </span>
+</td>
+
+                      
                       <td className="text-center">
                         <i
                           className="fas fa-trash text-danger"
