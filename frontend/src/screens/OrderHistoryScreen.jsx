@@ -144,7 +144,7 @@ export default function OrderHistoryScreen() {
                           {order.isPaid ? order.paidAt.substring(0, 10) : 'NO'}
                         </span>
                       </td>
-                      <td className="text-center">
+{/*                       <td className="text-center">
                         <span
                           className={
                             order.isPaid && !order.isDelivered
@@ -160,6 +160,24 @@ export default function OrderHistoryScreen() {
                         </span>
                       </td>
 
+ */}
+ <td className="text-center">
+  <span
+    className={`badge text-center ${
+      order.isPaid
+        ? order.isDelivered
+          ? 'bg-success'
+          : 'bg-warning'
+        : 'bg-danger'
+    }`}
+  >
+    {order.isPaid && order.isDelivered && order.deliveredAt
+      ? order.deliveredAt.substring(0, 10)
+      : 'NO'}
+  </span>
+</td>
+
+                      
                       <td className="text-center">
                         <Link
                           className="btn btn-sm btn-light"
