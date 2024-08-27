@@ -47,66 +47,171 @@ export const mailgun = () =>
   });
 
 export const payOrderEmailTemplate = (order) => {
-  return `<h1>Thanks for shopping with us </h1>
-    <p>
-    Hi ${order.user.name},</p>
-<p> We have finished processing your order,</p>
-<h2> [Order ${order._id}] (${order.createdAt.toString().substring(0, 10)})</h2>
-<table>
-  <thead>
-  <tr>
-  <td><strong>Product</strong></td>
-  <td><strong>Quantity</strong></td>
-  <td><strong align="right">Price</strong></td>
-  </thead>
-  <tbody>
-  ${order.orderItems
-    .map(
-      (item) => `
-    <tr>
-    <td>${item.name}</td>
-    <td align="center">${item.quantity}</td>
-    <td align="right"> $${item.price.toFixed(2)}</td>
-    </tr>
-  `
-    )
-    .join('\n')}
-  </tbody>
-  <tfoot>
-  <tr>
-  <td colspan="2">Items Price:</td>
-  <td align="right"> $${order.itemsPrice.toFixed(2)}</td>
-  </tr>
-  <tr>
-  <td colspan="2">Shipping Price:</td>
-  <td align="right"> $${order.shippingPrice.toFixed(2)}</td>
-  </tr>
-  <tr>
-  <td colspan="2">Tax:</td>
-  <td align="right"> $${order.taxPrice.toFixed(2)}</td>
-  </tr>
- 
-  <tr>
-  <td colspan="2"><strong>Total Price:</strong></td>
-  <td align="right"><strong> $${order.totalPrice.toFixed(2)}</strong></td>
-  </tr>
-  <tr>
-  <td colspan="2">Payment Method:</td>
-  <td align="right">${order.paymentMethod}</td>
-  </tr>
-  </table>
-  <h2>Shipping address</h2>
-  <p>
-  ${order.shippingAddress.fullName},<br/>
-  ${order.shippingAddress.address},<br/>
-  ${order.shippingAddress.city},<br/>
-  ${order.shippingAddress.country},<br/>
-  ${order.shippingAddress.postalCode}<br/>
-  </p>
-  <hr/>
-  <p>
-  Thanks for shopping with us. if you have any issue regarding your order please contact with support team.(vaibhavrandale800@gmail.com)
-  </p>
+  return `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Confirmation</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+      }
 
-    `;
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #0056b3;
+        font-size: 24px;
+        text-align: center;
+      }
+
+      h2 {
+        color: #007bff;
+        font-size: 20px;
+        margin-top: 20px;
+      }
+
+      p {
+        font-size: 16px;
+        margin: 10px 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid #ddd;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #007bff;
+        color: #fff;
+      }
+
+      tfoot td {
+        font-weight: bold;
+        background-color: #e9ecef;
+      }
+
+      tfoot td:first-child {
+        text-align: left;
+      }
+
+      hr {
+        border: 0;
+        height: 1px;
+        background: #ddd;
+        margin: 30px 0;
+      }
+
+      .footer {
+        text-align: center;
+        font-size: 14px;
+        color: #777;
+        margin-top: 20px;
+      }
+
+      .footer a {
+        color: #0056b3;
+        text-decoration: none;
+      }
+
+      .footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Thanks for Shopping with Us</h1>
+      <p>Hi ${order.user.name},</p>
+      <p>We have finished processing your order,</p>
+      <h2>
+        [Order ${order._id}] (${order.createdAt.toString().substring(0, 10)})
+      </h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th align="right">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${order.orderItems .map( (item) => `
+          <tr>
+            <td>${item.name}</td>
+            <td align="center">${item.quantity}</td>
+            <td align="right">$${item.price.toFixed(2)}</td>
+          </tr>
+          ` ) .join("\n")}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2">Items Price:</td>
+            <td align="right">$${order.itemsPrice.toFixed(2)}</td>
+          </tr>
+          <tr>
+            <td colspan="2">Shipping Price:</td>
+            <td align="right">$${order.shippingPrice.toFixed(2)}</td>
+          </tr>
+          <tr>
+            <td colspan="2">Tax:</td>
+            <td align="right">$${order.taxPrice.toFixed(2)}</td>
+          </tr>
+          <tr>
+            <td colspan="2"><strong>Total Price:</strong></td>
+            <td align="right">
+              <strong>$${order.totalPrice.toFixed(2)}</strong>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">Payment Method:</td>
+            <td align="right">${order.paymentMethod}</td>
+          </tr>
+        </tfoot>
+      </table>
+      <h2>Shipping Address</h2>
+      <p>
+        ${order.shippingAddress.fullName},<br />
+        ${order.shippingAddress.address},<br />
+        ${order.shippingAddress.city},<br />
+        ${order.shippingAddress.country},<br />
+        ${order.shippingAddress.postalCode}<br />
+      </p>
+      <hr />
+      <p class="footer">
+        Thanks for shopping with us. If you have any issues regarding your
+        order, please contact our support team at
+        <a href="mailto:vaibhavrandale800@gmail.com"
+          >vaibhavrandale800@gmail.com</a
+        >.
+      </p>
+    </div>
+  </body>
+</html>`;
 };
