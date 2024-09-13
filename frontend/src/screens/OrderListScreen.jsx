@@ -133,6 +133,7 @@ export default function OrderListScreen() {
             <table className="table table-bordered ">
               <thead>
                 <tr>
+                  <th className="text-center">Sr</th>
                   <th className="text-center">ID</th>
                   <th className="text-center">USER</th>
                   <th className="text-center">DATE</th>
@@ -150,8 +151,9 @@ export default function OrderListScreen() {
                     </td>
                   </tr>
                 ) : (
-                  currentOrders.map((order) => (
+                  currentOrders.map((order, index) => (
                     <tr key={order._id}>
+                      <td className="text-center">{index + 1}</td>
                       <td className="text-center">
                         <Link
                           className=""
@@ -172,6 +174,7 @@ export default function OrderListScreen() {
                       <td className="text-center">
                         {order.totalPrice.toFixed(2)}
                       </td>
+
                       <td className="text-center">
                         <span
                           className={
@@ -183,37 +186,21 @@ export default function OrderListScreen() {
                           {order.isPaid ? order.paidAt.substring(0, 10) : 'NO'}
                         </span>
                       </td>
-{/*                       <td className="text-center">
+
+                      <td className="text-center">
                         <span
-  className={
-    order.isPaid
-      ? order.isDelivered
-        ? 'bg-success text-center badge'
-        : 'bg-warning text-center badge'
-      : 'bg-danger text-center badge'
-  }
->
-  {order.isDelivered ? order.deliveredAt.substring(0, 10) : 'NO'}
-</span>
-                      </td> */}
-                    <td className="text-center">
-  <span
-    className={`badge text-center ${
-      order.isPaid
-        ? order.isDelivered
-          ? 'bg-success'
-          : 'bg-warning'
-        : 'bg-danger'
-    }`}
-  >
-    {order.isDelivered && order.deliveredAt
-      ? order.deliveredAt.substring(0, 10)
-      : 'NO'}
-  </span>
-</td>
+                          className={`badge text-center ${
+                            order.isPaid
+                              ? order.isDelivered
+                                ? 'bg-success' // Paid and delivered
+                                : 'bg-warning' // Paid but not delivered
+                              : 'bg-danger' // Not paid
+                          }`}
+                        >
+                          {order.isDelivered ? 'Yes' : 'No'}
+                        </span>
+                      </td>
 
-
-                      
                       <td className="text-center">
                         <i
                           className="fas fa-trash text-danger"

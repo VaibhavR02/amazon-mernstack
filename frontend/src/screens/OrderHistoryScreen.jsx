@@ -144,40 +144,21 @@ export default function OrderHistoryScreen() {
                           {order.isPaid ? order.paidAt.substring(0, 10) : 'NO'}
                         </span>
                       </td>
-{/*                       <td className="text-center">
+
+                      <td className="text-center">
                         <span
-                          className={
-                            order.isPaid && !order.isDelivered
-                              ? 'bg-warning text-center badge '
-                              : order.isPaid
-                              ? 'bg-success text-center badge '
-                              : 'bg-danger text-center badge '
-                          }
+                          className={`badge text-center ${
+                            order.isPaid
+                              ? order.isDelivered
+                                ? 'bg-success' // Paid and delivered
+                                : 'bg-warning' // Paid but not delivered
+                              : 'bg-danger' // Not paid
+                          }`}
                         >
-                          {order.isDelivered
-                            ? order.deliveredAt.substring(0, 10)
-                            : 'NO'}
+                          {order.isDelivered ? 'Yes' : 'No'}
                         </span>
                       </td>
 
- */}
- <td className="text-center">
-  <span
-    className={`badge text-center ${
-      order.isPaid
-        ? order.isDelivered
-          ? 'bg-success'
-          : 'bg-warning'
-        : 'bg-danger'
-    }`}
-  >
-    {order.isPaid && order.isDelivered && order.deliveredAt
-      ? order.deliveredAt.substring(0, 10)
-      : 'NO'}
-  </span>
-</td>
-
-                      
                       <td className="text-center">
                         <Link
                           className="btn btn-sm btn-light"

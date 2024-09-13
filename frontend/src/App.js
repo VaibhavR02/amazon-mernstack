@@ -37,7 +37,7 @@ import UserEditScreen from './screens/UserEditScreen';
 
 import Loader from './components/Loader';
 import Footer from './components/Footer';
-import RazorpayComponent from './screens/RazorpayComponent';
+// import RazorpayComponent from './screens/RazorpayComponent';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -295,14 +295,14 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-              <Route
+              {/* <Route
                 path="/razorpay"
                 element={
                   <ProtectedRoute>
                     <RazorpayComponent />
                   </ProtectedRoute>
                 }
-              />
+              /> */}
               <Route
                 path="/orderhistory"
                 element={
