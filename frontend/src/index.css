@@ -7,6 +7,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
+
+.center-spinner {
+  position: fixed;
+  top: 40%;
+  left: 40%;
+  transform: translate(-40%, -40%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  width: 100vw;
+}
+
 * a {
   text-decoration: none;
   font-weight: 700;
