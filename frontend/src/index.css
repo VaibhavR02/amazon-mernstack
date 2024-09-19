@@ -97,10 +97,21 @@ main {
   color: #000000;
 }
 
-.products {
+/* .products {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+} */
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(820px, 1fr)
+  ); /* Automatically adjust columns */
+  gap: 1px; /* Adds spacing between items */
+  justify-items: center; /* Centers items in their grid cells */
+  align-items: center;
 }
 
 .products > .product {
@@ -110,16 +121,18 @@ main {
 
 .product {
   transition: all 0.5s;
-  width: 250px;
+  width: 180px;
+  height: 270px;
+  border: 1px solid rgb(187, 186, 186);
 }
 
 .product:hover {
-  box-shadow: 0px 6px 15px rgba(54, 54, 54, 0.63);
+  box-shadow: 0px 1px 2px rgba(54, 54, 54, 0.63);
 }
 
 .product img {
   width: 100%;
-  max-height: 150px;
+  max-height: 100%;
   object-fit: contain;
 }
 .product-info {

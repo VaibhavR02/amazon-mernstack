@@ -79,7 +79,7 @@ const Home = () => {
         </Contain>
       </div>
       <hr className="my-4" style={{ opacity: '0' }} />
-      <div className="mx-5  mt-3">
+      <div className="mx-2  mt-3">
         <h1>Featured Products</h1>
         <div className="products">
           {loading ? (
@@ -89,7 +89,7 @@ const Home = () => {
           ) : (
             <Row>
               {products.map((product) => (
-                <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
+                <Col key={product.slug} className="m-1">
                   <Product product={product} />
                 </Col>
               ))}
@@ -125,8 +125,8 @@ const Wrap = styled.div`
   border-radius: 10px;
   cursor: default;
   overflow: hidden;
-  box-shadow: rgb(0 0 0 /69%) 0px 26px 30px -10px,
-    rgb(0 0 0 /73%) 0px 16px 10px -10px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 15px -5px,
+    rgba(0, 0, 0, 0.15) 0px 6px 10px -5px;
   transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   object-position: center;
   border: 2px solid rgba(249, 249, 249, 0.1);

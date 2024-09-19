@@ -93,7 +93,7 @@ function App() {
                 onClick={() => setSidebarIsOpen(!siderbarIsOpen)}
               >
                 {' '}
-                <i className="fas fa-bars"></i>{' '}
+                <i className="fas fa-bars  fs-4 text-gray-500"></i>{' '}
               </Button>
               <LinkContainer to={'/'}>
                 <Navbar.Brand>
