@@ -122,7 +122,7 @@ const Product = (props) => {
                 {product.name}
               </Card.Title>
             </Link>
-            <Rating rating={product.rating} numReviews={product.numReviews} />
+            {/* <Rating rating={product.rating} numReviews={product.numReviews} /> */}
             <Card.Text style={{ fontSize: '14px', fontWeight: 'bold' }}>
               ${product.price}
             </Card.Text>

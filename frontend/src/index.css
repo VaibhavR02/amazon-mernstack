@@ -104,14 +104,15 @@ main {
 } */
 
 .products {
+  max-width: 100%; /* Full width but within the parent container */
+  margin: 0 auto; /* Center the grid container */
   display: grid;
   grid-template-columns: repeat(
-    auto-fill,
-    minmax(820px, 1fr)
-  ); /* Automatically adjust columns */
-  gap: 1px; /* Adds spacing between items */
-  justify-items: center; /* Centers items in their grid cells */
-  align-items: center;
+    auto-fit,
+    minmax(250px, 1fr)
+  ); /* Responsive grid */
+  justify-content: center; /* Centers the items horizontally */
+  gap: 10px;
 }
 
 .products > .product {
@@ -121,7 +122,7 @@ main {
 
 .product {
   transition: all 0.5s;
-  width: 180px;
+  width: 165px;
   height: 270px;
   border: 1px solid rgb(187, 186, 186);
 }
@@ -267,17 +268,18 @@ main {
 
 .side-navbar {
   opacity: 1;
-  z-index: 3000;
+  z-index: 30000;
   width: 170px;
   height: 100%;
   position: absolute;
   left: -300px;
   background-color: #1d1c1c;
-  transition: 0.5s;
+  transition: 0.5s ease-out;
 }
 
 .site-container {
   transition: 0.4s;
+  z-index: 90000;
 }
 .active-cont {
   margin-left: 20px;
