@@ -70,6 +70,19 @@ export default function OrderHistoryScreen() {
     setCurrentPage(pageNumber);
   };
 
+  function formatTimestamp(isoString) {
+    const date = new Date(isoString);
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  }
+
   return (
     <div className="container">
       <Helmet>
@@ -97,6 +110,7 @@ export default function OrderHistoryScreen() {
             <table className="table table-bordered">
               <thead>
                 <tr>
+                  <th className="text-center">Sr</th>
                   <th className="text-center">ID</th>
                   <th className="text-center">DATE</th>
                   <th className="text-center">TOTAL</th>
@@ -113,8 +127,11 @@ export default function OrderHistoryScreen() {
                     </td>
                   </tr>
                 ) : (
-                  currentOrders.map((order) => (
+                  currentOrders.map((order, index) => (
                     <tr key={order._id}>
+                      <td className="text-center">
+                        {indexOfFirstItem + index + 1}
+                      </td>
                       <td className="text-center">
                         <Link
                           className=""
@@ -128,7 +145,8 @@ export default function OrderHistoryScreen() {
                       </td>
 
                       <td className="text-center">
-                        {order.createdAt.substring(0, 10)}
+                        {/* {order.createdAt} */}
+                        {formatTimestamp(order.createdAt)}
                       </td>
                       <td className="text-center">
                         {order.totalPrice.toFixed(2)}
@@ -165,7 +183,7 @@ export default function OrderHistoryScreen() {
                           type="button"
                           variant="light"
                           to={`/order/${order._id}`}
-                          target="_blank"
+                          // target="_blank"
                         >
                           Details
                         </Link>

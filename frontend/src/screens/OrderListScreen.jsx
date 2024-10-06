@@ -153,14 +153,16 @@ export default function OrderListScreen() {
                 ) : (
                   currentOrders.map((order, index) => (
                     <tr key={order._id}>
-                      <td className="text-center">{index + 1}</td>
+                      <td className="text-center">
+                        {indexOfFirstItem + index + 1}
+                      </td>
                       <td className="text-center">
                         <Link
                           className=""
                           type="button"
                           variant="light"
                           to={`/order/${order._id}`}
-                          target="_blank"
+                          // target="_blank"
                         >
                           {order._id}
                         </Link>
