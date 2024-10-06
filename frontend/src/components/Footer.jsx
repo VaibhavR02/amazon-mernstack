@@ -84,8 +84,8 @@ const Footer = () => {
           <div className="copyright">
             <p>
               &copy;{' '}
-              <a href="amazon-onrender.com" target="blank">
-                amazon-onrender.com
+              <a href="https://amazonnew.onrender.com" target="blank">
+                amazonnew.onrender.com
               </a>{' '}
               -Vaibhav Randale <br /> All Rights Reserved 2023
             </p>
