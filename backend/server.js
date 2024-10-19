@@ -27,6 +27,14 @@ app.use('/api/keys/paypal', (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
 });
 
+// Example: Set your Razorpay keys from the .env file
+const razorpayKeyId = process.env.RAZORPAY_KEY_ID;
+const razorpayKeySecret = process.env.RAZORPAY_KEY_SECRET;
+
+app.get('/api/config/razorpay/5346346456323321321341254756876', (req, res) => {
+  res.json({ keyId: razorpayKeyId, keySecret: razorpayKeySecret });
+});
+
 app.use('/api/upload', uploadRouter);
 app.use('/api/seed', seedRouter);
 app.use('/api/products', productRouter);

@@ -1,11 +1,11 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate, useParams } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
+// import dotenv from 'dotenv';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -50,12 +50,15 @@ function reducer(state, action) {
   }
 }
 export default function OrderScreen() {
+  // dotenv.config();
   const { state } = useContext(Store);
   const { userInfo } = state;
 
   const params = useParams();
   const { id: orderId } = params;
   const navigate = useNavigate();
+  const [razorpayKeyId, setRazorpayKeyId] = useState('');
+  const [razorpayKeySecret, setRazorpayKeySecret] = useState('');
 
   const [
     {
@@ -123,6 +126,8 @@ export default function OrderScreen() {
         const { data } = await axios.get(`/api/orders/${orderId}`, {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
+        // console.log(data);
+
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
@@ -162,7 +167,17 @@ export default function OrderScreen() {
         });
         paypalDispatch({ type: 'setLoadingStatus', value: 'pending' });
       };
+
+      const getRazorpayKey = async () => {
+        const { data } = await axios.get(
+          '/api/config/razorpay/5346346456323321321341254756876'
+        );
+        setRazorpayKeyId(data.keyId);
+        setRazorpayKeySecret(data.keySecret);
+      };
+
       loadPaypalScript();
+      getRazorpayKey();
     }
   }, [
     order,
@@ -190,6 +205,41 @@ export default function OrderScreen() {
       toast.error(getError(err));
       dispatch({ type: 'DELIVER_FAIL' });
     }
+  }
+
+  function handleRazorpayPayment() {
+    const options = {
+      key: razorpayKeyId,
+      key_secret: razorpayKeySecret,
+      amount: order.totalPrice * 100, // Razorpay works with paise, so multiply by 100
+      currency: 'INR',
+      name: 'Amazon Merchant',
+      description: 'Order Payment',
+      order_id: 'Amazon' + order._id, // you need to generate this on the server
+      handler: async function (response) {
+        try {
+          dispatch({ type: 'PAY_REQUEST' });
+          const { data } = await axios.put(
+            `/api/orders/${order._id}/pay`,
+            response, // sending Razorpay payment response to backend
+            { headers: { authorization: `Bearer ${userInfo.token}` } }
+          );
+          dispatch({ type: 'PAY_SUCCESS', payload: data });
+          toast.success('Order is paid');
+        } catch (err) {
+          dispatch({ type: 'PAY_FAIL', payload: getError(err) });
+          toast.error(getError(err));
+        }
+      },
+      prefill: {
+        name: userInfo.name,
+        email: userInfo.email,
+        contact: '1234567890',
+      },
+    };
+
+    const razorpay = new window.Razorpay(options);
+    razorpay.open();
   }
 
   return loading ? (
@@ -338,16 +388,12 @@ export default function OrderScreen() {
                           ></PayPalButtons>
                         )}
                         {paymentMethod === 'RazorPay' && (
-                          // Add Razorpay button here
                           <Button
                             id="razorpay-button"
-                            createOrder={createOrder}
-                            onApprove={onApprove}
-                            onError={onError}
+                            onClick={handleRazorpayPayment} // Call handleRazorpayPayment function
                           >
                             Pay with Razorpay
                           </Button>
-                          // You may need to define handleRazorpayPayment function to open the Razorpay modal
                         )}
                       </div>
                     )}
