@@ -169,9 +169,7 @@ export default function OrderScreen() {
       };
 
       const getRazorpayKey = async () => {
-        const { data } = await axios.get(
-          '/api/config/razorpay/5346346456323321321341254756876'
-        );
+        const { data } = await axios.get('/api/config/razorpay');
         setRazorpayKeyId(data.keyId);
         setRazorpayKeySecret(data.keySecret);
       };
@@ -215,7 +213,7 @@ export default function OrderScreen() {
       currency: 'INR',
       name: 'Amazon Merchant',
       description: 'Order Payment',
-      order_id: 'Amazon' + order._id, // you need to generate this on the server
+      order_id: order._id, // you need to generate this on the server
       handler: async function (response) {
         try {
           dispatch({ type: 'PAY_REQUEST' });

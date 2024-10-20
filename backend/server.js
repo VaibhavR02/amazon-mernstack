@@ -31,7 +31,7 @@ app.use('/api/keys/paypal', (req, res) => {
 const razorpayKeyId = process.env.RAZORPAY_KEY_ID;
 const razorpayKeySecret = process.env.RAZORPAY_KEY_SECRET;
 
-app.get('/api/config/razorpay/5346346456323321321341254756876', (req, res) => {
+app.get('/api/config/razorpay', (req, res) => {
   res.json({ keyId: razorpayKeyId, keySecret: razorpayKeySecret });
 });
 
