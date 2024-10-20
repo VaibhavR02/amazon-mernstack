@@ -213,7 +213,7 @@ export default function OrderScreen() {
       currency: 'INR',
       name: 'Amazon Merchant',
       description: 'Order Payment',
-      order_id: order._id, // you need to generate this on the server
+      order_id: orderId, // you need to generate this on the server
       handler: async function (response) {
         try {
           dispatch({ type: 'PAY_REQUEST' });

@@ -98,11 +98,15 @@ function ProductScreen() {
   };
 
   const submitHandler = async (e) => {
+    dispatch({
+      type: 'CREATE_REQUEST',
+    });
     e.preventDefault();
     if (!comment || !rating) {
       toast.error('Please enter comment and rating');
       return;
     }
+
     try {
       const { data } = await axios.post(
         `/api/products/${product._id}/reviews`,
@@ -241,7 +245,7 @@ function ProductScreen() {
         </div>
         <ListGroup>
           {product.reviews.map((review) => (
-            <ListGroup.Item key={review._id}>
+            <ListGroup.Item key={review._id} className="my-1 border border-1">
               <strong>{review.name}</strong>
               <Rating rating={review.rating} caption=" "></Rating>
               <p>{review.createdAt.substring(0, 10)}</p>
@@ -283,12 +287,12 @@ function ProductScreen() {
               <div className="mb-3">
                 <Button
                   className="btn-sm"
-                  disabled={loadingCreateReview}
+                  // disabled={loadingCreateReview}
                   type="submit"
                 >
-                  Submit
+                  {loadingCreateReview ? 'Submitting....' : 'Submit'}
                 </Button>
-                {loadingCreateReview && <LoadingBox></LoadingBox>}
+                {/* {loadingCreateReview && <LoadingBox></LoadingBox>} */}
               </div>
             </form>
           ) : (
