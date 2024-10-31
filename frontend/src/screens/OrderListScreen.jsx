@@ -139,6 +139,7 @@ export default function OrderListScreen() {
                   <th className="text-center">DATE</th>
                   <th className="text-center">TOTAL</th>
                   <th className="text-center">PAID</th>
+                  <th className="text-center">Payment Method</th>
                   <th className="text-center">DELIVERED</th>
                   <th className="text-center">ACTIONS</th>
                 </tr>
@@ -188,6 +189,8 @@ export default function OrderListScreen() {
                           {order.isPaid ? order.paidAt.substring(0, 10) : 'NO'}
                         </span>
                       </td>
+
+                      <td className="text-center">{order.paymentMethod}</td>
 
                       <td className="text-center">
                         <span

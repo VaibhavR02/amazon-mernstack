@@ -71,7 +71,7 @@ const SignupScreen = () => {
                 type="text"
               />
               <br />
-              <label htmlFor="">Email or mobile</label>
+              <label htmlFor="">Email</label>
               <br />
               <input
                 onChange={(e) => setEmail(e.target.value)}

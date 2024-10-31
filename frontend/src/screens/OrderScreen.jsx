@@ -15,6 +15,8 @@ import MessageBox from '../components/MessageBox';
 import { Store } from './Store';
 import { getError } from '../util';
 import { toast } from 'react-hot-toast';
+import Modal from 'react-bootstrap/Modal';
+import './PaytmModal.css'; // Add this CSS file to style the modal
 
 function reducer(state, action) {
   switch (action.type) {
@@ -109,6 +111,7 @@ export default function OrderScreen() {
         );
         dispatch({ type: 'PAY_SUCCESS', payload: data });
         toast.success('Order is paid');
+        localStorage.removeItem('paymentMethod');
       } catch (err) {
         dispatch({ type: 'PAY_FAIL', payload: getError(err) });
         toast.error(getError(err));
@@ -137,8 +140,6 @@ export default function OrderScreen() {
     if (!userInfo) {
       return navigate('/login');
     }
-    // Retrieve payment method from localStorage
-    const paymentMethod = localStorage.getItem('paymentMethod');
 
     if (
       !order._id ||
@@ -224,6 +225,7 @@ export default function OrderScreen() {
           );
           dispatch({ type: 'PAY_SUCCESS', payload: data });
           toast.success('Order is paid');
+          localStorage.removeItem('paymentMethod');
         } catch (err) {
           dispatch({ type: 'PAY_FAIL', payload: getError(err) });
           toast.error(getError(err));
@@ -239,6 +241,50 @@ export default function OrderScreen() {
     const razorpay = new window.Razorpay(options);
     razorpay.open();
   }
+  // State to manage the Paytm modal visibility
+  const [showPaytmModal, setShowPaytmModal] = useState(false);
+
+  const closeModal = () => {
+    setShowPaytmModal(false); // Close modal
+  };
+
+  // const handlePaytmPayment = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     setShowPaytmModal(true); // Show modal for user experience
+
+  //     dispatch({ type: 'PAY_REQUEST' });
+  //     const { data } = await axios.put(`/api/orders/${order._id}/pay`, order, {
+  //       headers: { authorization: `Bearer ${userInfo.token}` },
+  //     });
+  //     dispatch({ type: 'PAY_SUCCESS', payload: data });
+  //     toast.success('Order is paid using paytm');
+  //   } catch (err) {
+  //     dispatch({ type: 'PAY_FAIL', payload: getError(err) });
+  //     toast.error(getError(err));
+  //   }
+  // };
+
+  const handlePaytmPayment = (e) => {
+    e.preventDefault();
+    setShowPaytmModal(true); // Open the modal without triggering payment
+  };
+
+  const confirmPaytmPayment = async () => {
+    try {
+      dispatch({ type: 'PAY_REQUEST' });
+      const { data } = await axios.put(`/api/orders/${order._id}/pay`, order, {
+        headers: { authorization: `Bearer ${userInfo.token}` },
+      });
+      dispatch({ type: 'PAY_SUCCESS', payload: data });
+      toast.success('Order is paid using Paytm');
+      localStorage.removeItem('paymentMethod');
+      closeModal();
+    } catch (err) {
+      dispatch({ type: 'PAY_FAIL', payload: getError(err) });
+      toast.error(getError(err));
+    }
+  };
 
   return loading ? (
     <LoadingBox></LoadingBox>
@@ -378,14 +424,14 @@ export default function OrderScreen() {
                       <LoadingBox />
                     ) : (
                       <div>
-                        {paymentMethod === 'PayPal' && (
+                        {order.paymentMethod === 'PayPal' && (
                           <PayPalButtons
                             createOrder={createOrder}
                             onApprove={onApprove}
                             onError={onError}
                           ></PayPalButtons>
                         )}
-                        {paymentMethod === 'RazorPay' && (
+                        {order.paymentMethod === 'RazorPay' && (
                           <Button
                             id="razorpay-button"
                             onClick={handleRazorpayPayment} // Call handleRazorpayPayment function
@@ -393,6 +439,90 @@ export default function OrderScreen() {
                             Pay with Razorpay
                           </Button>
                         )}
+
+                        {order.paymentMethod === 'Paytm' && (
+                          <Button
+                            onClick={handlePaytmPayment}
+                            className="btn  paytmbutton"
+                          >
+                            Pay with Paytm
+                          </Button>
+                        )}
+
+                        {/* <Modal
+                          show={showPaytmModal}
+                          onHide={closeModal}
+                          centered
+                        >
+                          <Modal.Header closeButton>
+                            <Modal.Title>Pay with Paytm</Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>
+                            <p>
+                              This is a demo Paytm payment experience for
+                              testing purposes.
+                            </p>
+                            <p>
+                              <strong>Order Total:</strong> ₹{order.totalPrice}
+                            </p>
+                            <p>Please proceed to payment through Paytm.</p>
+                          </Modal.Body>
+                          <Modal.Footer>
+                            <Button variant="secondary" onClick={closeModal}>
+                              Close
+                            </Button>
+                            <Button
+                              variant="primary"
+                              onClick={confirmPaytmPayment}
+                            >
+                              Confirm Payment
+                            </Button>
+                          </Modal.Footer>
+                        </Modal> */}
+
+                        <Modal
+                          show={showPaytmModal}
+                          onHide={closeModal}
+                          centered
+                        >
+                          <Modal.Header
+                            closeButton
+                            className="paytm-modal-header"
+                          >
+                            <Modal.Title>
+                              <img
+                                src="https://pwebassets.paytm.com/commonwebassets/paytmweb/header/images/logo.svg" // Replace with Paytm logo or any relevant logo for a similar look
+                                alt="Paytm"
+                                className="paytm-logo"
+                              />
+                            </Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>
+                            <p className="paytm-info"></p>
+                            <p className="paytm-order-total">
+                              <strong> Total:</strong> ₹{order.totalPrice}
+                            </p>
+                            <p className="paytm-instruction">
+                              Please proceed to payment through Paytm.
+                            </p>
+                          </Modal.Body>
+                          <Modal.Footer>
+                            <Button
+                              variant="secondary"
+                              onClick={closeModal}
+                              className="paytm-button"
+                            >
+                              Close
+                            </Button>
+                            <Button
+                              variant="primary"
+                              onClick={confirmPaytmPayment}
+                              className="paytm-button paytm-confirm-button"
+                            >
+                              Confirm Payment
+                            </Button>
+                          </Modal.Footer>
+                        </Modal>
                       </div>
                     )}
                     {loadingPay && <LoadingBox></LoadingBox>}

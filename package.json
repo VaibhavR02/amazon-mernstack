@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/VaibhavR02/amazon-mernstack/issues"
   },
-  "homepage": "https://github.com/VaibhavR02/amazon-mernstack#readme"
+  "homepage": "https://github.com/VaibhavR02/amazon-mernstack#readme",
+  "dependencies": {
+    "paytmchecksum": "^1.5.1"
+  }
 }

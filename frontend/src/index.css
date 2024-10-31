@@ -83,6 +83,13 @@ main {
   flex: 1;
 }
 
+.paytmbutton {
+  border: none;
+  font-weight: 600 !important;
+  background-color: #00b9f5 !important;
+  color: #f0f0f0 !important;
+}
+
 .btn-primary,
 .btn-outline-primary {
   background-color: #ffc040;
