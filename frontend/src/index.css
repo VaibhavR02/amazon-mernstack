@@ -276,7 +276,7 @@ main {
 .side-navbar {
   opacity: 1;
   z-index: 30000;
-  width: 170px;
+  width: 270px;
   height: 100%;
   position: absolute;
   left: -300px;
